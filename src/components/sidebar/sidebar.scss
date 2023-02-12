@@ -1,0 +1,21 @@
+.sidebar {
+  padding: 2em;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.center {
+  ul {
+    line-height: 2;
+  }
+  h4 {
+    margin-top: 1em;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+}

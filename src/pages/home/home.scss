@@ -1,0 +1,9 @@
+.home {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+.cards {
+  display: flex;
+  gap: 1em;
+}

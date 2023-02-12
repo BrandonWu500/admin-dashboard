@@ -1,0 +1,47 @@
+.navbar {
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .search {
+    border: 2px solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px;
+
+    input {
+      border: 0;
+      font-size: inherit;
+      outline: none;
+    }
+
+    button {
+      background-color: transparent;
+      border: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    .profile {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+}
