@@ -1,9 +1,34 @@
+@import '../../globalStyles/config';
+
 .home {
   display: grid;
   grid-template-columns: 1fr 5fr;
-}
+  padding-bottom: 4em;
 
-.cards {
-  display: flex;
-  gap: 1em;
+  .right {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+
+    .charts {
+      display: flex;
+      gap: 2em;
+    }
+  }
+
+  .cards {
+    display: flex;
+    gap: 1em;
+  }
+
+  .tables {
+    padding: 1em;
+    box-shadow: $box-shadow;
+    border-radius: 10px;
+    width: 90%;
+    h2 {
+      color: $text-primary-color;
+      margin-bottom: 1em;
+    }
+  }
 }

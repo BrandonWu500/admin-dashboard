@@ -10,7 +10,7 @@ import './sidebar.scss';
 
 const Sidebar = () => {
   return (
-    <div className="sidebar">
+    <nav className="sidebar">
       <div className="top">
         <h2 className="logo">SHOP</h2>
       </div>
@@ -18,56 +18,56 @@ const Sidebar = () => {
         <ul>
           <h4>MAIN</h4>
           <li>
-            <DashboardIcon />
+            <DashboardIcon className="icon" />
             <span>Dashboard</span>
           </li>
           <h4>LISTS</h4>
           <li>
-            <PersonIcon />
+            <PersonIcon className="icon" />
             <span>Users</span>
           </li>
           <li>
-            <StoreIcon />
+            <StoreIcon className="icon" />
             <span>Products</span>
           </li>
           <li>
-            <CreditCardIcon />
+            <CreditCardIcon className="icon" />
             <span>Orders</span>
           </li>
           <h4>USEFUL</h4>
           <li>
-            <AssessmentIcon />
+            <AssessmentIcon className="icon" />
             <span>Stats</span>
           </li>
           <li>
-            <NotificationsIcon />
+            <NotificationsIcon className="icon" />
             <span>Notifications</span>
           </li>
           <h4>SERVICE</h4>
           <li>
-            <SettingsApplicationsIcon />
+            <SettingsApplicationsIcon className="icon" />
             <span>System Health</span>
           </li>
           <li>
-            <SettingsApplicationsIcon />
+            <SettingsApplicationsIcon className="icon" />
             <span>Logs</span>
           </li>
           <li>
-            <SettingsApplicationsIcon />
+            <SettingsApplicationsIcon className="icon" />
             <span>Settings</span>
           </li>
           <h4>USER</h4>
           <li>
-            <ExitToAppIcon />
+            <ExitToAppIcon className="icon" />
             <span>Profile</span>
           </li>
           <li>
-            <ExitToAppIcon />
+            <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>
         </ul>
       </div>
-    </div>
+    </nav>
   );
 };
 export default Sidebar;

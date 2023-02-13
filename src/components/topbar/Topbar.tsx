@@ -4,11 +4,11 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ChatIcon from '@mui/icons-material/Chat';
 import SettingsIcon from '@mui/icons-material/Settings';
-import './navbar.scss';
+import './topbar.scss';
 
-const Navbar = () => {
+const Topbar = () => {
   return (
-    <nav className="navbar">
+    <div className="topbar">
       <div className="left">
         <div className="search">
           <input type="text" placeholder="Search..." />
@@ -29,9 +29,11 @@ const Navbar = () => {
           </li>
           <li>
             <NotificationsIcon />
+            <span className="badge">1</span>
           </li>
           <li>
             <ChatIcon />
+            <span className="badge">2</span>
           </li>
           <li>
             <img src="/images/people/1.jpg" alt="" className="profile" />
@@ -41,7 +43,7 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-    </nav>
+    </div>
   );
 };
-export default Navbar;
+export default Topbar;

@@ -1,9 +1,25 @@
+@import '../../globalStyles/config';
+
 .sidebar {
   padding: 2em;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 1em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: $text-primary-color;
+  font-weight: 500;
+
+  h2 {
+    font-weight: 700;
+  }
+
+  h2,
+  .icon {
+    color: $text-accent-color;
+  }
 }
 
 .center {

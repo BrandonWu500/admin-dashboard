@@ -1,0 +1,13 @@
+$positive-color: green;
+$negative-color: crimson;
+$neutral-color: goldenrod;
+$accent-color: purple;
+$box-shadow: 2px 4px 10px 1px rgba(gray, 0.2);
+$text-primary-color: gray;
+$text-accent-color: rebeccapurple;
+
+// set background color and text color
+@mixin set-color($color) {
+  background-color: rgba($color, 0.15);
+  color: $color;
+}

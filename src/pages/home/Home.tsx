@@ -1,6 +1,9 @@
+import BasicTable from '../../components/basicTable/BasicTable';
 import Card from '../../components/card/Card';
-import Navbar from '../../components/navbar/Navbar';
+import Chart from '../../components/chart/Chart';
+import Featured from '../../components/featured/Featured';
 import Sidebar from '../../components/sidebar/Sidebar';
+import Topbar from '../../components/topbar/Topbar';
 import { homeCards } from '../../data';
 import './home.scss';
 
@@ -10,14 +13,22 @@ const Home = () => {
       <div className="left">
         <Sidebar />
       </div>
-      <div className="right">
-        <Navbar />
+      <main className="right">
+        <Topbar />
         <ul className="cards">
           {homeCards.map((card, idx) => (
             <Card key={idx} {...card} />
           ))}
         </ul>
-      </div>
+        <section className="charts">
+          <Featured />
+          <Chart aspect={2 / 1} title="Last 6 Months (Revenue in $)" />
+        </section>
+        <section className="tables">
+          <h2>Latest Orders</h2>
+          <BasicTable />
+        </section>
+      </main>
     </div>
   );
 };

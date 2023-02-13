@@ -1,15 +1,51 @@
+@import 'config';
+
 * {
   font-family: 'Nunito', sans-serif;
   margin: 0;
 }
+
 ul {
   list-style: none;
   padding: 0;
 }
+
 button {
   cursor: pointer;
 }
+
 img {
   display: block;
   max-width: 100%;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    transform: scale(0.98);
+  }
+}
+
+/* color classes */
+.positive {
+  @include set-color($positive-color);
+}
+.negative {
+  @include set-color($negative-color);
+}
+.neutral {
+  @include set-color($neutral-color);
+}
+.accent {
+  @include set-color($accent-color);
+}
+
+/* text classes */
+.text-positive {
+  color: $positive-color;
+}
+.text-negative {
+  color: $negative-color;
 }

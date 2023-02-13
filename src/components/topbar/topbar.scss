@@ -1,4 +1,4 @@
-.navbar {
+.topbar {
   padding: 2em;
   display: flex;
   align-items: center;
@@ -36,12 +36,27 @@
     display: flex;
     align-items: center;
     gap: 0.5em;
+    position: relative;
 
     .profile {
       width: 3rem;
       height: 3rem;
       border-radius: 50%;
       object-fit: cover;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      background-color: red;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      position: absolute;
+      top: -0.75rem;
+      right: -0.75rem;
     }
   }
 }

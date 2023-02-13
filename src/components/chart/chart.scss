@@ -1,0 +1,12 @@
+@import '../../globalStyles/config';
+
+.chart {
+  padding: 1em;
+  box-shadow: $box-shadow;
+  border-radius: 10px;
+
+  h2 {
+    color: $text-primary-color;
+    margin-bottom: 1em;
+  }
+}
