@@ -1,21 +1,6 @@
 @import '../../globalStyles/config';
 
 .home {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-  padding-bottom: 4em;
-
-  .right {
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
-
-    .charts {
-      display: flex;
-      gap: 2em;
-    }
-  }
-
   .cards {
     display: flex;
     gap: 1em;

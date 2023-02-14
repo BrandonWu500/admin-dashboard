@@ -7,6 +7,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import './sidebar.scss';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
@@ -18,13 +19,17 @@ const Sidebar = () => {
         <ul>
           <h4>MAIN</h4>
           <li>
-            <DashboardIcon className="icon" />
-            <span>Dashboard</span>
+            <Link to="/">
+              <DashboardIcon className="icon" />
+              <span>Dashboard</span>
+            </Link>
           </li>
           <h4>LISTS</h4>
           <li>
-            <PersonIcon className="icon" />
-            <span>Users</span>
+            <Link to="/users">
+              <PersonIcon className="icon" />
+              <span>Users</span>
+            </Link>
           </li>
           <li>
             <StoreIcon className="icon" />

@@ -1,0 +1,64 @@
+.dataTable {
+  margin: 0 auto;
+
+  h1 {
+    margin-bottom: 1em;
+    padding-left: 1rem;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  th {
+    button {
+      text-transform: capitalize;
+      background-color: transparent;
+      border: 0;
+      font-size: inherit;
+      font-weight: 700;
+      width: 100%;
+    }
+    .unsorted {
+      visibility: hidden;
+    }
+    &:hover {
+      background-color: lightgray;
+      .unsorted {
+        visibility: visible;
+        opacity: 0.5;
+      }
+    }
+  }
+  .unsortable:hover {
+    background-color: transparent;
+  }
+
+  .action button {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 0.5em;
+    background-color: transparent;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 1em;
+  }
+
+  input {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wrapper {
+    border-radius: 5px;
+    padding: 0.5em;
+    text-align: center;
+    text-transform: capitalize;
+  }
+}

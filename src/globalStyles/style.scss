@@ -28,6 +28,50 @@ a {
   }
 }
 
+/* DEFAULT PAGE LAYOUT */
+.page {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  padding-bottom: 4em;
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+
+    .charts {
+      display: flex;
+      gap: 2em;
+    }
+  }
+}
+
+/* utility classes */
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.flex-left {
+  justify-content: start;
+}
+
+.profile {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-lg {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 /* color classes */
 .positive {
   @include set-color($positive-color);
@@ -48,4 +92,10 @@ a {
 }
 .text-negative {
   color: $negative-color;
+}
+.text-neutral {
+  color: $neutral-color;
+}
+.text-accent {
+  color: $accent-color;
 }
