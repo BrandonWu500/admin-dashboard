@@ -1,7 +1,32 @@
+import { useEffect, useState } from 'react';
 import { orders } from '../../data';
 import './basicTable.scss';
 
-const BasicTable = () => {
+interface User {
+  id: number;
+  product: string;
+  img: string;
+  customer: string;
+  date: string;
+  amount: number;
+  method: string;
+  status: string;
+}
+
+type BasicTableProps = {
+  user?: string;
+};
+
+const BasicTable = ({ user = 'all' }: BasicTableProps) => {
+  const [users, setUsers] = useState<User[]>([]);
+  useEffect(() => {
+    if (user === 'all') {
+      setUsers(orders);
+    } else {
+      const userOrders = orders.filter((order) => order.customer === user);
+      setUsers(userOrders);
+    }
+  }, [user]);
   return (
     <table className="basicTable">
       <thead>
@@ -16,8 +41,8 @@ const BasicTable = () => {
         </tr>
       </thead>
       <tbody>
-        {orders.map((order) => (
-          <tr>
+        {users.map((order) => (
+          <tr key={order.id}>
             <td>{order.id}</td>
             <td>
               <div className="flex">

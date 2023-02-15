@@ -1,0 +1,21 @@
+.userCardRow {
+  h3 {
+    text-transform: capitalize;
+  }
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+
+  .wrapper {
+    position: relative;
+  }
+
+  input,
+  textarea {
+    position: absolute;
+    left: -3px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+}

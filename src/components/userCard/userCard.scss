@@ -1,0 +1,57 @@
+@import '../../globalStyles/config';
+
+.info {
+  position: relative;
+  max-width: 400px;
+  padding: 1em;
+  color: $text-primary-color;
+
+  .edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+    padding: 0.5em 1em;
+  }
+
+  .btns {
+    margin-top: 2em;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+
+    button {
+      border: 0;
+      padding: 0.5em;
+    }
+  }
+
+  h1 {
+    font-size: 2rem;
+    color: darken($text-primary-color, 20%);
+  }
+
+  h2 {
+    opacity: 0.7;
+  }
+
+  .bot {
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .hidden {
+    display: none;
+  }
+  .vis-hidden {
+    visibility: hidden;
+  }
+}

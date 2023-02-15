@@ -11,3 +11,12 @@ $text-accent-color: rebeccapurple;
   background-color: rgba($color, 0.15);
   color: $color;
 }
+
+// gap classes
+$gapamounts: (1, 2, 3, 4, 5);
+
+@each $gap in $gapamounts {
+  .g-#{$gap} {
+    gap: #{$gap}em !important;
+  }
+}

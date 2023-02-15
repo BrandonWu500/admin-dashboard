@@ -5,15 +5,4 @@
     display: flex;
     gap: 1em;
   }
-
-  .tables {
-    padding: 1em;
-    box-shadow: $box-shadow;
-    border-radius: 10px;
-    width: 90%;
-    h2 {
-      color: $text-primary-color;
-      margin-bottom: 1em;
-    }
-  }
 }

@@ -3,6 +3,7 @@
 * {
   font-family: 'Nunito', sans-serif;
   margin: 0;
+  box-sizing: border-box;
 }
 
 ul {
@@ -70,6 +71,22 @@ a {
   height: 6rem;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.shadow {
+  border-radius: 10px;
+  box-shadow: $box-shadow;
+}
+
+.tables {
+  padding: 1em;
+  box-shadow: $box-shadow;
+  border-radius: 10px;
+  width: 90%;
+  h2 {
+    color: $text-primary-color;
+    margin-bottom: 1em;
+  }
 }
 
 /* color classes */

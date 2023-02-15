@@ -1,5 +1,8 @@
+import BasicTable from '../../components/basicTable/BasicTable';
+import Chart from '../../components/chart/Chart';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Topbar from '../../components/topbar/Topbar';
+import UserCard from '../../components/userCard/UserCard';
 import './single.scss';
 
 const Single = () => {
@@ -10,32 +13,15 @@ const Single = () => {
       </div>
       <div className="right">
         <Topbar />
-        <section className="info">
-          <div className="top">
-            <h2>Information</h2>
-          </div>
-          <div className="bot">
-            <img src="/images/people/2.jpg" alt="" className="profile-lg" />
-            <div className="text">
-              <h1>Jane Doe</h1>
-              <div className="row">
-                <h3>Email:</h3>
-                <span>janedoe@gmail.com</span>
-              </div>
-              <div className="row">
-                <h3>Phone:</h3>
-                <span>(+1)123-456-789</span>
-              </div>
-              <div className="row">
-                <h3>Address:</h3>
-                <span>123 Baker St, Boston, MA</span>
-              </div>
-              <div className="row">
-                <h3>Country:</h3>
-                <span>United States</span>
-              </div>
-            </div>
-          </div>
+        <div className="flex flex-left g-3">
+          <UserCard />
+          <section className="charts">
+            <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
+          </section>
+        </div>
+        <section className="tables">
+          <h2>Latest User Orders</h2>
+          <BasicTable user="Jane Doe" />
         </section>
       </div>
     </div>
