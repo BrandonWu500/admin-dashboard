@@ -5,6 +5,8 @@ import Login from './pages/login/Login';
 import Single from './pages/single/Single';
 import New from './pages/new/New';
 import './globalStyles/style.scss';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }

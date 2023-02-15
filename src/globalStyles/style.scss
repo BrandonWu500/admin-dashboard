@@ -59,6 +59,10 @@ a {
   justify-content: start;
 }
 
+.flex-col {
+  flex-direction: column;
+}
+
 .profile {
   width: 3rem;
   height: 3rem;
@@ -77,6 +81,15 @@ a {
   border-radius: 10px;
   box-shadow: $box-shadow;
 }
+
+.hidden {
+  display: none;
+}
+.vis-hidden {
+  visibility: hidden;
+}
+
+/* component classes */
 
 .tables {
   padding: 1em;

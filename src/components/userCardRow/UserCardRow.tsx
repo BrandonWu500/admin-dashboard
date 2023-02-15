@@ -6,7 +6,6 @@ type UserCardRowProps = {
   inputRefs: any;
   infoKey: string;
   infoVal: string;
-  setInfo: React.Dispatch<React.SetStateAction<Info>>;
 };
 
 const UserCardRow = ({
@@ -14,7 +13,6 @@ const UserCardRow = ({
   inputRefs,
   infoKey,
   infoVal,
-  setInfo,
 }: UserCardRowProps) => {
   return (
     <div className="userCardRow">
@@ -23,7 +21,7 @@ const UserCardRow = ({
         <span>{infoVal}</span>
         {infoKey === 'address' ? (
           <textarea
-            name=""
+            name={infoKey}
             id=""
             className={isEditing ? '' : 'hidden'}
             ref={(ref) => (inputRefs.current[infoKey] = ref)}
@@ -32,7 +30,7 @@ const UserCardRow = ({
         ) : (
           <input
             type="text"
-            name=""
+            name={infoKey}
             id=""
             className={isEditing ? '' : 'hidden'}
             ref={(ref) => (inputRefs.current[infoKey] = ref)}
