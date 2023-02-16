@@ -10,7 +10,7 @@ const List = () => {
       </div>
       <div className="right">
         <Topbar />
-        <DataTable />
+        <DataTable title="Users" />
       </div>
     </div>
   );

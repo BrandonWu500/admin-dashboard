@@ -4,7 +4,10 @@ $neutral-color: goldenrod;
 $accent-color: purple;
 $box-shadow: 2px 4px 10px 1px rgba(gray, 0.2);
 $text-primary-color: gray;
+$text-primary-light: lightgray;
 $text-accent-color: rebeccapurple;
+$bg-light: whitesmoke;
+$bg-dark: #333;
 
 // set background color and text color
 @mixin set-color($color) {

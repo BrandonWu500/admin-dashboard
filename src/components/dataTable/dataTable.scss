@@ -1,6 +1,19 @@
 .dataTable {
   margin: 0 auto;
 
+  .top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+
+    button {
+      padding: 1em;
+      border: 0;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+  }
+
   h1 {
     margin-bottom: 1em;
     padding-left: 1rem;

@@ -1,6 +1,6 @@
 import './dataTable.scss';
 import { useEffect, useState } from 'react';
-import { users as dummyData } from '../../data';
+import { users as dummyData } from '../../data/data';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link } from 'react-router-dom';
@@ -25,7 +25,11 @@ enum SortingDirection {
   UNSORTED = 'UNSORTED',
 }
 
-const DataTable = () => {
+type DataTableProps = {
+  title: string;
+};
+
+const DataTable = ({ title }: DataTableProps) => {
   const [users, setUsers] = useState<User[]>([]);
   const [unsorted, setUnsorted] = useState<User[]>([]);
   const [headers, setHeaders] = useState<string[]>([]);
@@ -89,7 +93,12 @@ const DataTable = () => {
   };
   return (
     <div className="dataTable">
-      <h1>Users</h1>
+      <header className="top">
+        <h1>{title}</h1>
+        <Link to={`/${title}/new`}>
+          <button className="positive">Add {title.slice(0, -1)}</button>
+        </Link>
+      </header>
       <table>
         <thead>
           <tr>

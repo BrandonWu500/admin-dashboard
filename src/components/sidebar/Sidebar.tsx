@@ -70,6 +70,11 @@ const Sidebar = () => {
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>
+          <h4>THEME</h4>
+          <li>
+            <span className="theme-square"></span>
+            <span className="theme-square"></span>
+          </li>
         </ul>
       </div>
     </nav>

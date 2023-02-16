@@ -4,7 +4,7 @@ import Chart from '../../components/chart/Chart';
 import Featured from '../../components/featured/Featured';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Topbar from '../../components/topbar/Topbar';
-import { homeCards } from '../../data';
+import { homeCards } from '../../data/data';
 import './home.scss';
 
 const Home = () => {

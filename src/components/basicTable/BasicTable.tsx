@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { orders } from '../../data';
+import { orders } from '../../data/data';
 import './basicTable.scss';
 
 interface User {

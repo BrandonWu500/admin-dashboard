@@ -20,7 +20,8 @@ img {
   max-width: 100%;
 }
 
-a {
+a,
+button {
   cursor: pointer;
   text-decoration: none;
 
@@ -73,6 +74,13 @@ a {
 .profile-lg {
   width: 6rem;
   height: 6rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-xl {
+  width: 8rem;
+  height: 8rem;
   border-radius: 50%;
   object-fit: cover;
 }
