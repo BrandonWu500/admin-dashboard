@@ -92,7 +92,7 @@ const DataTable = ({ title }: DataTableProps) => {
     setUsers(newUsers);
   };
   return (
-    <div className="dataTable">
+    <div className="dataTable shadow">
       <header className="top">
         <h1>{title}</h1>
         <Link to={`/${title}/new`}>

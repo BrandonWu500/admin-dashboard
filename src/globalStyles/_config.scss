@@ -1,13 +1,19 @@
 $positive-color: green;
+$positive-light: limegreen;
 $negative-color: crimson;
+$negative-light: red;
 $neutral-color: goldenrod;
 $accent-color: purple;
-$box-shadow: 2px 4px 10px 1px rgba(gray, 0.2);
+$accent-light: rgb(218, 45, 218);
 $text-primary-color: gray;
 $text-primary-light: lightgray;
 $text-accent-color: rebeccapurple;
+$text-accent-light: rgb(154, 85, 222);
 $bg-light: whitesmoke;
 $bg-dark: #333;
+$bg-darker: #222;
+$box-shadow: 2px 4px 10px 1px rgba(gray, 0.2);
+$box-shadow-light: 2px 4px 10px 1px rgba(lightgray, 0.3);
 
 // set background color and text color
 @mixin set-color($color) {

@@ -16,14 +16,16 @@
       font-size: inherit;
       outline: none;
     }
-
-    button {
-      background-color: transparent;
-      border: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  }
+  button {
+    background-color: transparent;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    font-size: 1rem;
+    color: inherit;
   }
 
   ul {

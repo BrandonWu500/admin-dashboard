@@ -8,8 +8,11 @@ import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import './sidebar.scss';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { DarkModeContext, useDarkMode } from '../../context/darkModeContext';
 
 const Sidebar = () => {
+  const { lightModeOn, darkModeOn } = useDarkMode();
   return (
     <nav className="sidebar">
       <div className="top">
@@ -72,8 +75,8 @@ const Sidebar = () => {
           </li>
           <h4>THEME</h4>
           <li>
-            <span className="theme-square"></span>
-            <span className="theme-square"></span>
+            <button className="theme-square" onClick={lightModeOn}></button>
+            <button className="theme-square" onClick={darkModeOn}></button>
           </li>
         </ul>
       </div>

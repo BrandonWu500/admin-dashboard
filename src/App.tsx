@@ -9,10 +9,18 @@ import './globalStyles/darkMode.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { productInputs, userInputs } from './data/formSource';
+import {
+  DarkModeContext,
+  DarkModeContextProvider,
+  INITIAL_STATE,
+  useDarkMode,
+} from './context/darkModeContext';
+import { useContext } from 'react';
 
 function App() {
+  const { darkMode } = useDarkMode();
   return (
-    <div className="dark">
+    <div className={darkMode ? 'app dark' : 'app'}>
       <BrowserRouter>
         <Routes>
           <Route path="/">

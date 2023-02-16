@@ -1,2 +1,76 @@
-.dark {
+@import 'config';
+
+.app.dark {
+  background-color: $bg-dark;
+  color: $text-primary-light;
+  input {
+    background-color: $bg-dark;
+
+    &::placeholder {
+      color: $text-primary-light;
+    }
+  }
+
+  .shadow {
+    box-shadow: $box-shadow-light;
+  }
+
+  .text-accent {
+    color: $text-accent-light;
+  }
+
+  .positive {
+    @include set-color($positive-light);
+  }
+  .negative {
+    @include set-color($negative-light);
+  }
+  .accent {
+    @include set-color($accent-light);
+  }
+
+  .sidebar {
+    background-color: $bg-dark;
+    color: $text-primary-light;
+    h2,
+    .icon {
+      color: $text-accent-light;
+    }
+  }
+
+  .search {
+    border-color: $text-primary-light;
+    input,
+    button {
+      color: $text-primary-light;
+    }
+  }
+
+  .dataTable {
+    th {
+      button {
+        color: $text-primary-light;
+      }
+
+      &:hover {
+        background-color: $bg-darker;
+      }
+    }
+  }
+
+  .userCard {
+    h1 {
+      color: $text-primary-light;
+    }
+  }
+
+  .userCardRow {
+    input,
+    textarea,
+    span {
+      background-color: $bg-dark;
+      border: 0;
+      color: $text-primary-light;
+    }
+  }
 }
