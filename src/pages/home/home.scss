@@ -1,8 +1,10 @@
 @import '../../globalStyles/config';
 
 .home {
+  width: 100%;
   .cards {
     display: flex;
+    justify-content: space-between;
     gap: 1em;
   }
 }

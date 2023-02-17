@@ -6,7 +6,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import ChatIcon from '@mui/icons-material/Chat';
 import SettingsIcon from '@mui/icons-material/Settings';
 import './topbar.scss';
-import { useDarkMode } from '../../context/darkModeContext';
+import { useDarkMode } from '../../context/darkMode/darkModeContext';
 
 const Topbar = () => {
   const { darkMode, toggleModes } = useDarkMode();
@@ -15,7 +15,7 @@ const Topbar = () => {
       <div className="left">
         <div className="search">
           <input type="text" placeholder="Search..." />
-          <button>
+          <button className="btn-dispatch">
             <SearchIcon fontSize="small" />
           </button>
         </div>
@@ -28,12 +28,12 @@ const Topbar = () => {
           </li>
           <li>
             {darkMode ? (
-              <button onClick={toggleModes}>
+              <button onClick={toggleModes} className="btn-dispatch">
                 <LightModeIcon />
                 <span>Light Mode</span>
               </button>
             ) : (
-              <button onClick={toggleModes}>
+              <button onClick={toggleModes} className="btn-dispatch">
                 <DarkModeIcon />
                 <span>Dark Mode</span>
               </button>

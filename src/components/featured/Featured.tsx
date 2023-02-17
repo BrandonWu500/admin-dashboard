@@ -13,7 +13,7 @@ const Featured = () => {
         <MoreVertIcon />
       </div>
       <div className="row col">
-        <div className="chart">
+        <div className="featured-chart">
           <CircularProgressbar value={70} text={'70%'} />
         </div>
         <p>Total sales made today</p>

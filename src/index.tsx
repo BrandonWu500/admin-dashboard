@@ -2,9 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import {
+  AuthContextProvider,
+  AUTH_INIT_STATE,
+} from './context/auth/authContext';
+import {
   DarkModeContextProvider,
   INITIAL_STATE,
-} from './context/darkModeContext';
+} from './context/darkMode/darkModeContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +16,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <DarkModeContextProvider {...INITIAL_STATE}>
-      <App />
+      <AuthContextProvider {...AUTH_INIT_STATE}>
+        <App />
+      </AuthContextProvider>
     </DarkModeContextProvider>
   </React.StrictMode>
 );

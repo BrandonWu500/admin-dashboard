@@ -4,9 +4,17 @@ import { users as dummyData } from '../../data/data';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link } from 'react-router-dom';
+import {
+  collection,
+  getDocs,
+  doc,
+  deleteDoc,
+  onSnapshot,
+} from 'firebase/firestore';
+import { db } from '../../firebase';
 
 interface User {
-  id: number;
+  id: string;
   name: string;
   img: string;
   email: string;
@@ -35,9 +43,39 @@ const DataTable = ({ title }: DataTableProps) => {
   const [headers, setHeaders] = useState<string[]>([]);
   const [sortDirections, setSortDirections] = useState<SortDirections>({});
   useEffect(() => {
+    // Single Fetch
+    /* const fetchData = async () => {
+      let list: any = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, 'users'));
+        querySnapshot.forEach((doc) => {
+          // doc.data() is never undefined for query doc snapshots
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setUsers(list);
+        setUnsorted(list);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData(); */
+
+    // Listen (Realtime Updates)
+    const unsub = onSnapshot(collection(db, 'users'), (snapshot) => {
+      try {
+        const list: any = [];
+        snapshot.docs.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setUsers(list);
+        setUnsorted(list);
+      } catch (error) {
+        console.log(error);
+      }
+    });
     const { name, img, ...rest } = dummyData[0];
-    setUsers(dummyData);
-    setUnsorted(dummyData);
+    /* setUsers(dummyData);
+    setUnsorted(dummyData); */
     let newHeaders: string[] = [
       ...Object.keys(rest).slice(0, 1),
       'user',
@@ -54,6 +92,10 @@ const DataTable = ({ title }: DataTableProps) => {
     });
     setHeaders(newHeaders);
     setSortDirections(obj);
+
+    return () => {
+      unsub();
+    };
   }, []);
 
   const handleSort = (header: string) => {
@@ -87,9 +129,14 @@ const DataTable = ({ title }: DataTableProps) => {
     setUsers(newUsers);
   };
 
-  const handleDelete = (userToDelete: User) => {
-    const newUsers = users.filter((user) => user !== userToDelete);
-    setUsers(newUsers);
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteDoc(doc(db, 'users', id));
+      const newUsers = users.filter((user) => user.id !== id);
+      setUsers(newUsers);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="dataTable shadow">
@@ -128,7 +175,11 @@ const DataTable = ({ title }: DataTableProps) => {
                 if (header === 'user') {
                   return (
                     <td key={headerIdx} className="flex flex-left">
-                      <img src={user.img} alt="" className="profile" />
+                      <img
+                        src={user.img ? user.img : '/images/people/blank.png'}
+                        alt=""
+                        className="profile"
+                      />
                       <span>{user.name}</span>
                     </td>
                   );
@@ -163,7 +214,7 @@ const DataTable = ({ title }: DataTableProps) => {
                   </Link>
                   <button
                     className="text-negative"
-                    onClick={() => handleDelete(user)}
+                    onClick={() => handleDelete(user.id)}
                   >
                     Delete
                   </button>

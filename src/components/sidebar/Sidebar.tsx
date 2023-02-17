@@ -9,10 +9,15 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import './sidebar.scss';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { DarkModeContext, useDarkMode } from '../../context/darkModeContext';
+import {
+  DarkModeContext,
+  useDarkMode,
+} from '../../context/darkMode/darkModeContext';
+import { AuthContext } from '../../context/auth/authContext';
 
 const Sidebar = () => {
   const { lightModeOn, darkModeOn } = useDarkMode();
+  const { logout } = useContext(AuthContext);
   return (
     <nav className="sidebar">
       <div className="top">
@@ -70,8 +75,10 @@ const Sidebar = () => {
             <span>Profile</span>
           </li>
           <li>
-            <ExitToAppIcon className="icon" />
-            <span>Logout</span>
+            <button onClick={logout} className="btn-dispatch">
+              <ExitToAppIcon className="icon" />
+              <span>Logout</span>
+            </button>
           </li>
           <h4>THEME</h4>
           <li>

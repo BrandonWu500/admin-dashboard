@@ -1,0 +1,24 @@
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  form {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    input,
+    button {
+      padding: 0.5em;
+      font-size: 1rem;
+    }
+
+    span {
+      text-align: center;
+      padding: 0.5em 1em;
+    }
+  }
+}

@@ -42,7 +42,14 @@
     gap: 1em;
   }
 
+  li {
+    button {
+      margin-top: 0.5em;
+    }
+  }
+
   .theme-square {
+    margin-top: 5px;
     width: 2rem;
     height: 2rem;
     border-radius: 5px;
