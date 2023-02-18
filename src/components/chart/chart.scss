@@ -4,9 +4,18 @@
   padding: 1em;
   box-shadow: $box-shadow;
   border-radius: 10px;
+  width: 800px;
 
   h2 {
     color: $text-primary-color;
     margin-bottom: 1em;
+  }
+
+  @include laptop {
+    width: 600px;
+  }
+
+  @include mobile {
+    width: 300px;
   }
 }

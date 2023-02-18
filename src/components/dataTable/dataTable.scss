@@ -1,3 +1,5 @@
+@import '../../globalStyles/config';
+
 .dataTable {
   margin: 0 auto;
   padding: 1em;
@@ -7,11 +9,16 @@
     align-items: baseline;
     justify-content: space-between;
 
+    h1 {
+      text-transform: capitalize;
+    }
+
     button {
       padding: 1em;
       border: 0;
       border-radius: 5px;
       font-size: 1rem;
+      text-transform: capitalize;
     }
   }
 
@@ -22,6 +29,7 @@
 
   table {
     width: 100%;
+    border-collapse: collapse;
   }
 
   th {
@@ -32,6 +40,10 @@
       font-size: inherit;
       font-weight: 700;
       width: 100%;
+
+      &:hover {
+        transform: none;
+      }
     }
     .unsorted {
       visibility: hidden;
@@ -45,7 +57,7 @@
     }
   }
   .unsortable:hover {
-    background-color: transparent;
+    background-color: transparent !important;
   }
 
   .action button {
@@ -53,6 +65,7 @@
     border-radius: 5px;
     padding: 0.5em;
     background-color: transparent;
+    font-size: 1rem;
   }
 
   th,
@@ -74,5 +87,16 @@
     padding: 0.5em;
     text-align: center;
     text-transform: capitalize;
+  }
+
+  @include laptop {
+    td.flex {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    /*  .top {
+      margin-bottom: 2em;
+    } */
   }
 }

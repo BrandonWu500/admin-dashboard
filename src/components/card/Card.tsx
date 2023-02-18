@@ -8,15 +8,16 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { useEffect, useState } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { Link } from 'react-router-dom';
 
 type CardProps = {
   title: string;
-  num?: number;
-  changePercent?: number;
+  num: number;
+  changePercent: number;
 };
 
-const Card = ({ title /* num, changePercent */ }: CardProps) => {
-  const [num, setNum] = useState(0);
+const Card = ({ title, num, changePercent }: CardProps) => {
+  /* const [num, setNum] = useState(0);
   const [changePercent, setChangePercent] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
@@ -48,7 +49,7 @@ const Card = ({ title /* num, changePercent */ }: CardProps) => {
       );
     };
     fetchData();
-  }, []);
+  }, []); */
   return (
     <div className="card">
       <div className="row">
@@ -78,7 +79,9 @@ const Card = ({ title /* num, changePercent */ }: CardProps) => {
         </p>
       </div>
       <div className="row">
-        <span className="link">View</span>
+        <Link to={`/${title.toLowerCase()}`}>
+          <span className="link">View</span>
+        </Link>
         {title === 'USERS' && <PersonIcon className="icon negative" />}
         {title === 'ORDERS' && <ShoppingCartIcon className="icon neutral" />}
         {title === 'EARNINGS' && <PaidIcon className="icon positive" />}

@@ -18,7 +18,7 @@ const UserCardRow = ({
     <div className="userCardRow">
       <h3>{infoKey}:</h3>
       <div className="wrapper">
-        <span>{infoVal}</span>
+        <span className="info-val">{infoVal}</span>
         {infoKey === 'address' ? (
           <textarea
             name={infoKey}

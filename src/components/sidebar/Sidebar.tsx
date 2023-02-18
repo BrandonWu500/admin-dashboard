@@ -8,86 +8,95 @@ import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import './sidebar.scss';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import {
   DarkModeContext,
   useDarkMode,
 } from '../../context/darkMode/darkModeContext';
 import { AuthContext } from '../../context/auth/authContext';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Sidebar = () => {
   const { lightModeOn, darkModeOn } = useDarkMode();
   const { logout } = useContext(AuthContext);
+  const [navToggle, setNavToggle] = useState(false);
   return (
-    <nav className="sidebar">
-      <div className="top">
-        <h2 className="logo">SHOP</h2>
-      </div>
-      <div className="center">
-        <ul>
-          <h4>MAIN</h4>
-          <li>
-            <Link to="/">
-              <DashboardIcon className="icon" />
-              <span>Dashboard</span>
-            </Link>
-          </li>
-          <h4>LISTS</h4>
-          <li>
-            <Link to="/users">
-              <PersonIcon className="icon" />
-              <span>Users</span>
-            </Link>
-          </li>
-          <li>
-            <StoreIcon className="icon" />
-            <span>Products</span>
-          </li>
-          <li>
-            <CreditCardIcon className="icon" />
-            <span>Orders</span>
-          </li>
-          <h4>USEFUL</h4>
-          <li>
-            <AssessmentIcon className="icon" />
-            <span>Stats</span>
-          </li>
-          <li>
-            <NotificationsIcon className="icon" />
-            <span>Notifications</span>
-          </li>
-          <h4>SERVICE</h4>
-          <li>
-            <SettingsApplicationsIcon className="icon" />
-            <span>System Health</span>
-          </li>
-          <li>
-            <SettingsApplicationsIcon className="icon" />
-            <span>Logs</span>
-          </li>
-          <li>
-            <SettingsApplicationsIcon className="icon" />
-            <span>Settings</span>
-          </li>
-          <h4>USER</h4>
-          <li>
-            <ExitToAppIcon className="icon" />
-            <span>Profile</span>
-          </li>
-          <li>
-            <button onClick={logout} className="btn-dispatch">
+    <div className="sidebar">
+      <button className="menu-toggle" onClick={() => setNavToggle(!navToggle)}>
+        <MenuIcon fontSize="large" />
+      </button>
+      <nav className={navToggle ? 'open' : 'close'}>
+        <div className="top">
+          <h2 className="logo">SHOP</h2>
+        </div>
+        <div className="center">
+          <ul>
+            <h4>MAIN</h4>
+            <li>
+              <Link to="/">
+                <DashboardIcon className="icon" />
+                <span>Dashboard</span>
+              </Link>
+            </li>
+            <h4>LISTS</h4>
+            <li>
+              <Link to="/users">
+                <PersonIcon className="icon" />
+                <span>Users</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/products">
+                <StoreIcon className="icon" />
+                <span>Products</span>
+              </Link>
+            </li>
+            <li>
+              <CreditCardIcon className="icon" />
+              <span>Orders</span>
+            </li>
+            <h4>USEFUL</h4>
+            <li>
+              <AssessmentIcon className="icon" />
+              <span>Stats</span>
+            </li>
+            <li>
+              <NotificationsIcon className="icon" />
+              <span>Notifications</span>
+            </li>
+            <h4>SERVICE</h4>
+            <li>
+              <SettingsApplicationsIcon className="icon" />
+              <span>System Health</span>
+            </li>
+            <li>
+              <SettingsApplicationsIcon className="icon" />
+              <span>Logs</span>
+            </li>
+            <li>
+              <SettingsApplicationsIcon className="icon" />
+              <span>Settings</span>
+            </li>
+            <h4>USER</h4>
+            <li>
               <ExitToAppIcon className="icon" />
-              <span>Logout</span>
-            </button>
-          </li>
-          <h4>THEME</h4>
-          <li>
-            <button className="theme-square" onClick={lightModeOn}></button>
-            <button className="theme-square" onClick={darkModeOn}></button>
-          </li>
-        </ul>
-      </div>
-    </nav>
+              <span>Profile</span>
+            </li>
+            <li>
+              <button onClick={logout} className="btn-dispatch">
+                <ExitToAppIcon className="icon" />
+                <span>Logout</span>
+              </button>
+            </li>
+            <h4>THEME</h4>
+            <li>
+              <button className="theme-square" onClick={lightModeOn}></button>
+              <button className="theme-square" onClick={darkModeOn}></button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
   );
 };
 export default Sidebar;

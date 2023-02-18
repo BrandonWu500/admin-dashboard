@@ -12,8 +12,8 @@ const Topbar = () => {
   const { darkMode, toggleModes } = useDarkMode();
   return (
     <div className="topbar">
-      <div className="left">
-        <div className="search">
+      <div className="left ">
+        <div className="search mobile-hide">
           <input type="text" placeholder="Search..." />
           <button className="btn-dispatch">
             <SearchIcon fontSize="small" />
@@ -22,7 +22,7 @@ const Topbar = () => {
       </div>
       <div className="right">
         <ul>
-          <li>
+          <li className="tablet-hide">
             <LanguageIcon />
             <span>English</span>
           </li>
@@ -39,18 +39,18 @@ const Topbar = () => {
               </button>
             )}
           </li>
-          <li>
+          <li className="tablet-hide">
             <NotificationsIcon />
             <span className="badge">1</span>
           </li>
-          <li>
+          <li className="tablet-hide">
             <ChatIcon />
             <span className="badge">2</span>
           </li>
-          <li>
+          <li className="tablet-hide">
             <img src="/images/people/1.jpg" alt="" className="profile" />
           </li>
-          <li>
+          <li className="tablet-hide">
             <SettingsIcon />
           </li>
         </ul>

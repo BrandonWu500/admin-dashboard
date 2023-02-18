@@ -1,64 +1,104 @@
 @import '../../globalStyles/config';
 
 .sidebar {
-  padding: 2em;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  position: fixed;
-  top: 0;
-  left: 0;
-  color: $text-primary-color;
-  background-color: white;
-  font-weight: 500;
-  overflow: auto;
-
-  a {
-    color: inherit;
-  }
-
-  h2 {
-    font-weight: 700;
-  }
-
-  h2,
-  .icon {
-    color: $text-accent-color;
-  }
-}
-
-.center {
-  ul {
-    line-height: 2;
-  }
-  h4 {
-    margin-top: 1em;
-  }
-  li,
-  li a {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-  }
-
-  li {
-    button {
-      margin-top: 0.5em;
+  .menu-toggle {
+    display: none;
+    @include tablet {
+      display: block;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background-color: white;
+      border: 0;
+      z-index: 1000;
+      padding: 1em;
+      border-radius: 10px;
     }
   }
 
-  .theme-square {
-    margin-top: 5px;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 5px;
-    border: 1px solid $text-accent-color;
+  .open {
+    @include tablet {
+      transform: translateX(0%);
+      transition: transform 500ms ease;
+    }
   }
-  .theme-square:nth-of-type(1) {
-    background-color: $bg-light;
+  .close {
+    @include tablet {
+      transform: translateX(-100%);
+      transition: transform 500ms ease;
+    }
   }
-  .theme-square:nth-of-type(2) {
-    background-color: $bg-dark;
+
+  nav {
+    padding: 2em;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: $text-primary-color;
+    background-color: white;
+    font-weight: 500;
+    overflow: auto;
+    width: $sidebar-width;
+    z-index: 100;
+
+    .top {
+      h2 {
+        @include tablet {
+          margin-top: 2em;
+        }
+      }
+    }
+
+    a {
+      color: inherit;
+    }
+
+    h2 {
+      font-weight: 700;
+    }
+
+    h2,
+    .icon {
+      color: $text-accent-color;
+    }
+  }
+
+  .center {
+    ul {
+      line-height: 2;
+    }
+    h4 {
+      margin-top: 1em;
+    }
+    li,
+    li a {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+    }
+
+    li {
+      button {
+        margin-top: 0.5em;
+      }
+    }
+
+    .theme-square {
+      margin-top: 5px;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 5px;
+      border: 1px solid $text-accent-color;
+    }
+    .theme-square:nth-of-type(1) {
+      background-color: $bg-light;
+    }
+    .theme-square:nth-of-type(2) {
+      background-color: $bg-dark;
+    }
   }
 }

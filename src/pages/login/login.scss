@@ -1,8 +1,24 @@
+@import '../../globalStyles/config';
+
 .login {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  header {
+    text-align: center;
+    h1 {
+      color: $text-accent-color;
+    }
+    h2 {
+      margin: 1em 0;
+    }
+    .btn-dispatch {
+      gap: 3px;
+      justify-content: center;
+    }
+  }
 
   form {
     max-width: 500px;
@@ -14,6 +30,11 @@
     button {
       padding: 0.5em;
       font-size: 1rem;
+      border: 0;
+    }
+
+    input {
+      background-color: whitesmoke;
     }
 
     span {

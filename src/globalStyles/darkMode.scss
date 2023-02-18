@@ -4,7 +4,7 @@
   background-color: $bg-dark;
   color: $text-primary-light;
   input {
-    background-color: $bg-dark;
+    background-color: $bg-dark-200;
 
     &::placeholder {
       color: $text-primary-light;
@@ -30,11 +30,17 @@
   }
 
   .sidebar {
-    background-color: $bg-dark;
-    color: $text-primary-light;
-    h2,
-    .icon {
-      color: $text-accent-light;
+    .menu-toggle {
+      background-color: $bg-dark;
+      color: $text-primary-light;
+    }
+    nav {
+      background-color: $bg-dark;
+      color: $text-primary-light;
+      h2,
+      .icon {
+        color: $text-accent-light;
+      }
     }
   }
 

@@ -12,7 +12,8 @@ export type AuthStateType = {
 };
 
 export const AUTH_INIT_STATE: AuthStateType = {
-  curUser: JSON.parse(localStorage.getItem('user') || '') ?? null,
+  // @ts-ignore
+  curUser: JSON.parse(localStorage.getItem('user')) ?? null,
 };
 
 const useAuthContext = (initState: AuthStateType) => {

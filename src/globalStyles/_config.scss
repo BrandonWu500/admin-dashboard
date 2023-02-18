@@ -10,10 +10,12 @@ $text-primary-light: lightgray;
 $text-accent-color: rebeccapurple;
 $text-accent-light: rgb(154, 85, 222);
 $bg-light: whitesmoke;
+$bg-dark-200: #555;
 $bg-dark: #333;
 $bg-darker: #222;
 $box-shadow: 2px 4px 10px 1px rgba(gray, 0.2);
 $box-shadow-light: 2px 4px 10px 1px rgba(lightgray, 0.3);
+$sidebar-width: 200px;
 
 // set background color and text color
 @mixin set-color($color) {
@@ -27,5 +29,26 @@ $gapamounts: (1, 2, 3, 4, 5);
 @each $gap in $gapamounts {
   .g-#{$gap} {
     gap: #{$gap}em !important;
+  }
+}
+
+// laptop responsive
+@mixin laptop {
+  @media (max-width: 1400px) {
+    @content;
+  }
+}
+
+// tablet responsive
+@mixin tablet {
+  @media (max-width: 1000px) {
+    @content;
+  }
+}
+
+// mobile responsive
+@mixin mobile {
+  @media (max-width: 550px) {
+    @content;
   }
 }

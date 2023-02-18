@@ -8,6 +8,11 @@
     h1 {
       color: $text-primary-light;
     }
+    @include laptop {
+      h1 {
+        text-align: center;
+      }
+    }
   }
   .content {
     display: grid;
@@ -15,6 +20,12 @@
     gap: 2em;
     width: 100%;
     padding: 1em;
+
+    @include tablet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
     .content-left {
       margin-top: 2em;
@@ -33,6 +44,10 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 2em;
+
+      @include mobile {
+        padding: 1em;
+      }
 
       .input-group {
         display: flex;

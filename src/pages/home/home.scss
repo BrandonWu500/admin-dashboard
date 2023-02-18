@@ -2,9 +2,23 @@
 
 .home {
   width: 100%;
+
   .cards {
     display: flex;
     justify-content: space-between;
     gap: 1em;
+
+    @include laptop {
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .charts {
+    @include laptop {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }

@@ -24,6 +24,7 @@ a,
 button {
   cursor: pointer;
   text-decoration: none;
+  color: inherit;
 
   &:hover {
     transform: scale(0.98);
@@ -36,6 +37,7 @@ input {
 }
 
 /* DEFAULT PAGE LAYOUT */
+
 .page {
   display: grid;
   grid-template-columns: 1fr 5fr;
@@ -43,16 +45,38 @@ input {
   padding-bottom: 4em;
   height: 100%;
   min-height: 100vh;
+  z-index: 200;
+
+  @include laptop {
+    width: calc(100% - $sidebar-width);
+    margin-left: $sidebar-width;
+    display: block;
+    padding: 0;
+  }
+
+  @include tablet {
+    width: 100%;
+    overflow: auto;
+    margin-left: 0;
+  }
 
   .right {
     display: flex;
     flex-direction: column;
     gap: 2em;
 
+    @include tablet {
+      align-items: center;
+    }
+
     .charts {
       display: flex;
       justify-content: center;
       gap: 2em;
+
+      @include mobile {
+        font-size: 0.75rem;
+      }
     }
   }
 }
@@ -130,6 +154,10 @@ input {
   h2 {
     color: $text-primary-color;
     margin-bottom: 1em;
+  }
+
+  @include mobile {
+    overflow: auto;
   }
 }
 

@@ -1,10 +1,21 @@
+@import '../../globalStyles/config';
+
 .userCardRow {
   h3 {
     text-transform: capitalize;
   }
   display: flex;
   align-items: baseline;
+  @include tablet {
+    align-items: center;
+  }
   gap: 1em;
+  max-width: 40ch;
+  overflow: auto;
+
+  @include mobile {
+    max-width: 20ch;
+  }
 
   .wrapper {
     position: relative;

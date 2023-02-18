@@ -3,6 +3,13 @@
 .basicTable {
   width: 100%;
 
+  @include laptop {
+    font-size: 0.7rem;
+  }
+
+  @include mobile {
+  }
+
   th,
   td {
     border: 1px solid lightgray;
@@ -24,5 +31,11 @@
   .wrapper {
     border-radius: 5px;
     padding: 0.5em;
+  }
+
+  @include mobile {
+    .flex {
+      flex-direction: column;
+    }
   }
 }

@@ -15,6 +15,7 @@ import { storage, auth, db } from '../../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export interface FormInput {
   id: number;

@@ -27,7 +27,7 @@ const Chart = ({ aspect, title }: ChartProps) => {
   return (
     <div className="chart">
       <h2>{title}</h2>
-      <ResponsiveContainer width={700} aspect={aspect}>
+      <ResponsiveContainer width="100%" aspect={aspect}>
         <AreaChart
           data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}

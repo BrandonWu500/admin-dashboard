@@ -14,12 +14,12 @@ import {
 import { db } from '../../firebase';
 
 interface User {
-  id: string;
+  /* id: string;
   name: string;
   img: string;
   email: string;
   age: number;
-  status: string;
+  status: string; */
   [header: string]: string | number;
 }
 
@@ -38,7 +38,7 @@ type DataTableProps = {
 };
 
 const DataTable = ({ title }: DataTableProps) => {
-  const [users, setUsers] = useState<User[]>([]);
+  const [data, setData] = useState<User[]>([]);
   const [unsorted, setUnsorted] = useState<User[]>([]);
   const [headers, setHeaders] = useState<string[]>([]);
   const [sortDirections, setSortDirections] = useState<SortDirections>({});
@@ -61,21 +61,21 @@ const DataTable = ({ title }: DataTableProps) => {
     fetchData(); */
 
     // Listen (Realtime Updates)
-    const unsub = onSnapshot(collection(db, 'users'), (snapshot) => {
+    /* const unsub = onSnapshot(collection(db, 'users'), (snapshot) => {
       try {
         const list: any = [];
         snapshot.docs.forEach((doc) => {
           list.push({ id: doc.id, ...doc.data() });
         });
-        setUsers(list);
+        setData(list);
         setUnsorted(list);
       } catch (error) {
         console.log(error);
       }
-    });
+    }); */
     const { name, img, ...rest } = dummyData[0];
-    /* setUsers(dummyData);
-    setUnsorted(dummyData); */
+    setData(dummyData);
+    setUnsorted(dummyData);
     let newHeaders: string[] = [
       ...Object.keys(rest).slice(0, 1),
       'user',
@@ -93,16 +93,16 @@ const DataTable = ({ title }: DataTableProps) => {
     setHeaders(newHeaders);
     setSortDirections(obj);
 
-    return () => {
+    /* return () => {
       unsub();
-    };
+    }; */
   }, []);
 
   const handleSort = (header: string) => {
-    let newUsers = [...users];
+    let newData = [...data];
     if (sortDirections[header] === SortingDirection.UNSORTED) {
       sortDirections[header] = SortingDirection.ASCENDING;
-      newUsers.sort((a: User, b: User) => {
+      newData.sort((a: User, b: User) => {
         const filteredHeader = header === 'user' ? 'name' : header;
         const valA: string | number = a[filteredHeader];
         const valB: string | number = b[filteredHeader];
@@ -113,7 +113,7 @@ const DataTable = ({ title }: DataTableProps) => {
       });
     } else if (sortDirections[header] === SortingDirection.ASCENDING) {
       sortDirections[header] = SortingDirection.DESCENDING;
-      newUsers.sort((a: User, b: User) => {
+      newData.sort((a: User, b: User) => {
         const filteredHeader = header === 'user' ? 'name' : header;
         const valA: string | number = a[filteredHeader];
         const valB: string | number = b[filteredHeader];
@@ -124,16 +124,16 @@ const DataTable = ({ title }: DataTableProps) => {
       });
     } else {
       sortDirections[header] = SortingDirection.UNSORTED;
-      newUsers = [...unsorted];
+      newData = [...unsorted];
     }
-    setUsers(newUsers);
+    setData(newData);
   };
 
   const handleDelete = async (id: string) => {
     try {
-      await deleteDoc(doc(db, 'users', id));
-      const newUsers = users.filter((user) => user.id !== id);
-      setUsers(newUsers);
+      /* await deleteDoc(doc(db, title, id)); */
+      const newData = data.filter((val) => val.id !== id);
+      setData(newData);
     } catch (error) {
       console.log(error);
     }
@@ -169,7 +169,7 @@ const DataTable = ({ title }: DataTableProps) => {
           </tr>
         </thead>
         <tbody>
-          {users?.map((user: any) => (
+          {data?.map((user: any) => (
             <tr key={user.id}>
               {headers?.map((header: string, headerIdx) => {
                 if (header === 'user') {
