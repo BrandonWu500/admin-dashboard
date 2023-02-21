@@ -12,12 +12,10 @@ import { Link } from 'react-router-dom';
 
 type CardProps = {
   title: string;
-  num: number;
-  changePercent: number;
 };
 
-const Card = ({ title, num, changePercent }: CardProps) => {
-  /* const [num, setNum] = useState(0);
+const Card = ({ title }: CardProps) => {
+  const [num, setNum] = useState(0);
   const [changePercent, setChangePercent] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +47,7 @@ const Card = ({ title, num, changePercent }: CardProps) => {
       );
     };
     fetchData();
-  }, []); */
+  }, []);
   return (
     <div className="card">
       <div className="row">

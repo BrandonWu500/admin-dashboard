@@ -47,6 +47,12 @@ input {
   min-height: 100vh;
   z-index: 200;
 
+  .right {
+    .container {
+      padding: 0 2em;
+    }
+  }
+
   @include laptop {
     width: calc(100% - $sidebar-width);
     margin-left: $sidebar-width;
@@ -94,7 +100,14 @@ input {
 }
 
 .flex-col {
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.flex-row {
+  flex-direction: row;
 }
 
 .profile {
@@ -187,4 +200,7 @@ input {
 }
 .text-accent {
   color: $accent-color;
+}
+.image-proc-text {
+  color: $text-primary-light;
 }

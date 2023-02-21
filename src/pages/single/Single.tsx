@@ -16,7 +16,7 @@ const Single = () => {
         <div className="flex flex-left g-3">
           <UserCard />
           <section className="charts">
-            <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
+            <Chart aspect={2 / 1} title="User Spending ( Last 6 Months)" />
           </section>
         </div>
         <section className="tables">

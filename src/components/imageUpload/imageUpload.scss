@@ -1,0 +1,17 @@
+@import '../../globalStyles/config';
+
+.imageUpload {
+  display: flex;
+  align-items: center;
+  margin-top: 1em;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    cursor: pointer;
+  }
+  #file {
+    display: none;
+  }
+}

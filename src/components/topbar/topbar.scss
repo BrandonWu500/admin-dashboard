@@ -5,15 +5,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
 
   @include tablet {
     justify-content: center;
     gap: 2em;
-  }
-
-  @include mobile {
-    justify-content: center;
   }
 
   .search {
@@ -35,9 +30,7 @@
     align-items: center;
     gap: 2em;
     width: 100%;
-    @include tablet {
-      justify-content: flex-end;
-    }
+    justify-content: flex-end;
   }
 
   li {

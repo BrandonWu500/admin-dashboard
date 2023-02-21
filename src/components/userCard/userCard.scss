@@ -9,7 +9,11 @@
 
     button {
       border: 0;
-      padding: 0.5em 1em;
+      padding: 1em;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
     }
   }
 
@@ -41,6 +45,7 @@
     position: relative;
     max-width: 400px;
     padding: 1em;
+    padding-right: 2em;
     color: $text-primary-color;
 
     .edit {
@@ -76,10 +81,36 @@
       }
     }
 
+    .input-title {
+      /* font-size: 1rem;
+      padding: 0.5em; */
+      width: 50%;
+      border: 0;
+      border-bottom: 2px solid $text-primary-color;
+      font-size: 2rem;
+      color: darken($text-primary-color, 20%);
+      font-weight: 700;
+      background-color: transparent;
+    }
     .text {
       display: flex;
       flex-direction: column;
+      padding: 1em;
       gap: 1em;
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+      }
+    }
+
+    .image-load-text {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: $text-dark;
     }
   }
 }

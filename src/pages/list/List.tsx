@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import DataTable from '../../components/dataTable/DataTable';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Topbar from '../../components/topbar/Topbar';
+import './list.scss';
 
 const List = () => {
   const location = useLocation();
@@ -13,7 +14,9 @@ const List = () => {
       </div>
       <div className="right">
         <Topbar />
-        <DataTable title={title} />
+        <div className="container shadow">
+          <DataTable title={title} />
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,10 @@
+@import '../../globalStyles/config';
+
+.imagePreview {
+  border: 3px solid lightgray;
+  background-color: rgba(211, 211, 211, 0.5);
+  color: $text-primary-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

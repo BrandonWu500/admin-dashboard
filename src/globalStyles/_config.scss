@@ -5,6 +5,7 @@ $negative-light: red;
 $neutral-color: goldenrod;
 $accent-color: purple;
 $accent-light: rgb(218, 45, 218);
+$text-dark: black;
 $text-primary-color: gray;
 $text-primary-light: lightgray;
 $text-accent-color: rebeccapurple;
@@ -48,7 +49,7 @@ $gapamounts: (1, 2, 3, 4, 5);
 
 // mobile responsive
 @mixin mobile {
-  @media (max-width: 550px) {
+  @media (max-width: 600px) {
     @content;
   }
 }

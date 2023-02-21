@@ -4,7 +4,7 @@
   background-color: $bg-dark;
   color: $text-primary-light;
   input {
-    background-color: $bg-dark-200;
+    background-color: transparent;
 
     &::placeholder {
       color: $text-primary-light;
@@ -17,6 +17,9 @@
 
   .text-accent {
     color: $text-accent-light;
+  }
+  .image-proc-text {
+    color: $text-primary-light;
   }
 
   .positive {
@@ -68,6 +71,10 @@
     h1 {
       color: $text-primary-light;
     }
+
+    .input-title {
+      color: $text-primary-light;
+    }
   }
 
   .userCardRow {
@@ -78,5 +85,9 @@
       border: 0;
       color: $text-primary-light;
     }
+  }
+
+  .imagePreview {
+    color: $text-primary-light;
   }
 }

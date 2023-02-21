@@ -1,24 +1,35 @@
 @import '../../globalStyles/config';
 
 .userCardRow {
-  h3 {
-    text-transform: capitalize;
-  }
   display: flex;
   align-items: baseline;
+  padding: 0.5em;
+  gap: 1em;
+
   @include tablet {
     align-items: center;
   }
-  gap: 1em;
-  max-width: 40ch;
-  overflow: auto;
 
   @include mobile {
     max-width: 20ch;
   }
 
+  h3 {
+    text-transform: capitalize;
+  }
+  .info-val {
+    display: block;
+    width: 20ch;
+    max-height: 10ch;
+    overflow: hidden;
+    @include mobile {
+      width: 10ch;
+    }
+  }
+
   .wrapper {
     position: relative;
+    padding: 0.5em;
   }
 
   input,
@@ -32,5 +43,9 @@
     color: black;
     font-size: 1rem;
     border: 0;
+    width: 100%;
+  }
+  input {
+    border-bottom: 2px solid $text-primary-color;
   }
 }

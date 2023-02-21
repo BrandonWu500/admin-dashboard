@@ -3,6 +3,8 @@
 .dataTable {
   margin: 0 auto;
   padding: 1em;
+  width: 100%;
+  overflow: auto;
 
   .top {
     display: flex;
