@@ -17,6 +17,7 @@ import ImagePreview from '../imagePreview/ImagePreview';
 import ImageUpload from '../imageUpload/ImageUpload';
 import UserCardRow from '../userCardRow/UserCardRow';
 import './userCard.scss';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 export interface Info {
   /* email?: string;
@@ -75,62 +76,61 @@ const infoConverter = {
   },
 }; */
 
-const UserCard = () => {
+type UserCardProps = {
+  item: any;
+  id: string;
+  title: string;
+};
+
+const UserCard = ({ item, id, title }: UserCardProps) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [info, setInfo] = useState<Info>({});
   const [initInfo, setInitInfo] = useState<Info>({});
   const [infoInputs, setInfoInputs] = useState<Info>({});
   const [infoInputHeaders, setInfoInputHeaders] = useState<string[]>([]);
   const inputRefs = useRef<DictRefs>({});
-  const location = useLocation();
-  const category = location.pathname.split('/')[1];
-  const id = location.pathname.split('/')[2];
-  const [isLoading, setIsLoading] = useState(true);
   const [file, setFile] = useState<any>('');
   const [rdyToSave, setRdyToSave] = useState(true);
 
   useEffect(() => {
-    const fetchInfo = async () => {
-      try {
-        const docRef = doc(db, category, id);
-        /* const docRef = doc(db, category, id).withConverter(infoConverter); */
-        const docSnap = await getDoc(docRef);
-        const data = docSnap.data();
-        /* const obj = data?.toObj(); */
-        if (data) {
-          const { password, timestamp, name, img, ...rest } = data;
-          setInfo({ name, img });
-          setInitInfo({ name, img });
-          const order = ['username', 'email', 'phone', 'address', 'country'];
-          const sortedHeaders = Object.keys(
-            JSON.parse(JSON.stringify(rest, order))
-          );
-          setInfoInputHeaders(sortedHeaders);
-          setInfoInputs(rest);
-        }
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchInfo();
+    const { password, timestamp, name, img, ...rest } = item;
+    setInfo({ name, img });
+    setInitInfo({ name, img });
+    let order: string[] = [];
+    if (title === 'user') {
+      order = ['username', 'email', 'phone', 'address', 'country'];
+    } else if (title === 'product') {
+      order = ['price', 'category', 'description', 'stock'];
+    }
+    const sortedHeaders = Object.keys(JSON.parse(JSON.stringify(rest, order)));
+    setInfoInputHeaders(sortedHeaders);
+    setInfoInputs(rest);
   }, []);
 
   useEffect(() => {
     file && uploadFile(file, setInfo, setRdyToSave);
   }, [file]);
 
-  const handleSave = async () => {
+  const handleSave = async (e: any) => {
+    e.preventDefault();
     if (!rdyToSave) {
       return;
     }
     const obj: Info = { ...info };
+    // input validation
     Object.entries(inputRefs?.current).map(([key, val]) => {
       if (val.value) {
         obj[key] = val.value;
       } else {
         toast.error('You need to fill out all inputs before saving.');
         throw new Error();
+      }
+      if (key === 'email') {
+        const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (!val.value.match(emailRegex)) {
+          toast.error('Invalid email');
+          throw new Error();
+        }
       }
     });
     Object.entries(info).map(([key, val]) => {
@@ -139,7 +139,7 @@ const UserCard = () => {
         throw new Error();
       }
     });
-    await setDoc(doc(db, category, id), obj);
+    await setDoc(doc(db, title + 's', id), obj);
     const { name, img, ...rest } = obj;
     setInfoInputs(rest);
     setInfo({ name, img });
@@ -161,81 +161,83 @@ const UserCard = () => {
   }, [file]); */
   return (
     <div className="userCard">
-      <section className="info shadow">
-        {isLoading ? (
-          <h1>Loading...</h1>
-        ) : (
-          <>
-            <button
-              className="edit accent"
-              onClick={() => setIsEditing(!isEditing)}
-            >
-              Edit
-            </button>
-            <div className="top">
-              <h2>Information</h2>
-            </div>
-            <div className="bot">
-              <div className="text">
-                <div className="wrapper">
-                  {isEditing ? (
-                    <div className="flex-col">
-                      <ImagePreview file={file} />
-                      <ImageUpload setFile={setFile} />
-                    </div>
-                  ) : (
-                    <img
-                      src={info.img ?? '/images/people/blank.png'}
-                      alt=""
-                      className="profile-xl"
-                    />
-                  )}
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      className="input-title"
-                      onChange={(e) =>
-                        setInfo({ ...info, name: e.target.value })
-                      }
-                      defaultValue={info.name}
-                    />
-                  ) : (
-                    <h1>{info.name}</h1>
-                  )}
+      <form className="info shadow">
+        <button
+          className="edit accent"
+          onClick={() => setIsEditing(!isEditing)}
+          type="button"
+        >
+          Edit
+        </button>
+        <div className="top">
+          <h2>Information</h2>
+        </div>
+        <div className="bot">
+          <div className="text">
+            <div className="wrapper">
+              {isEditing ? (
+                <div className="flex-col">
+                  <ImagePreview file={file} />
+                  <ImageUpload setFile={setFile} />
                 </div>
-                {infoInputHeaders.map((infoKey: string) => (
-                  <UserCardRow
-                    key={infoKey}
-                    isEditing={isEditing}
-                    inputRefs={inputRefs}
-                    infoKey={infoKey}
-                    infoVal={infoInputs[infoKey]}
-                  />
-                ))}
-              </div>
+              ) : (
+                <>
+                  {info.img ? (
+                    <img src={info.img} alt="" className="profile-xl" />
+                  ) : (
+                    <div className="imagePreview profile-xl">
+                      <div className="flex-col">
+                        <CameraAltIcon fontSize="large" />
+                        <span>No Image</span>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+              {isEditing ? (
+                <input
+                  type="text"
+                  className="input-title"
+                  onChange={(e) => setInfo({ ...info, name: e.target.value })}
+                  defaultValue={info.name}
+                />
+              ) : (
+                <h1>{info.name}</h1>
+              )}
             </div>
-            <div className="btns">
-              <button
-                className={isEditing && rdyToSave ? 'positive' : 'hidden'}
-                onClick={handleSave}
-                disabled={!rdyToSave}
-              >
-                Save
-              </button>
-              <button
-                className={isEditing && rdyToSave ? 'negative' : 'hidden'}
-                onClick={resetInfo}
-                disabled={!rdyToSave}
-              >
-                Cancel
-              </button>
-              <p className="image-load-text">
-                {!rdyToSave && 'Processing Image...'}
-              </p>
-            </div>
-          </>
-        )}
-      </section>
+            {infoInputHeaders.map((infoKey: string) => (
+              <UserCardRow
+                key={infoKey}
+                isEditing={isEditing}
+                inputRefs={inputRefs}
+                infoKey={infoKey}
+                infoVal={infoInputs[infoKey]}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="btns">
+          <button
+            className={isEditing && rdyToSave ? 'positive' : 'hidden'}
+            onClick={handleSave}
+            disabled={!rdyToSave}
+            type="submit"
+          >
+            Save
+          </button>
+          <button
+            className={isEditing && rdyToSave ? 'negative' : 'hidden'}
+            onClick={resetInfo}
+            disabled={!rdyToSave}
+            type="button"
+          >
+            Cancel
+          </button>
+          <p className="image-load-text">
+            {!rdyToSave && 'Processing Image...'}
+          </p>
+        </div>
+      </form>
     </div>
   );
 };

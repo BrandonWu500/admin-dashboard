@@ -1,6 +1,12 @@
+@import '../../globalStyles/config';
+
 .list {
+  .right {
+    overflow: auto;
+  }
   .right .container {
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
     overflow: auto;
   }
 }

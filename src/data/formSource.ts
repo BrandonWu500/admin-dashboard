@@ -46,7 +46,7 @@ export const userInputs = [
 export const productInputs = [
   {
     id: 1,
-    label: 'Title',
+    label: 'Name',
     type: 'text',
     placeholder: 'Apple Macbook Pro',
   },
@@ -72,6 +72,6 @@ export const productInputs = [
     id: 5,
     label: 'Stock',
     type: 'text',
-    placeholder: 'in stock',
+    placeholder: '50',
   },
 ];

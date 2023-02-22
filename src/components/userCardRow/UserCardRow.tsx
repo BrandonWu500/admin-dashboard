@@ -19,24 +19,40 @@ const UserCardRow = ({
       <h3>{infoKey}:</h3>
       <div className="wrapper">
         <span className="info-val">{infoVal}</span>
-        {infoKey === 'address' ? (
+        {(infoKey === 'address' || infoKey === 'description') && (
           <textarea
             name={infoKey}
             id=""
             className={isEditing ? '' : 'hidden'}
             ref={(ref) => (inputRefs.current[infoKey] = ref)}
             defaultValue={infoVal}
+            required
           ></textarea>
-        ) : (
+        )}{' '}
+        {infoKey === 'email' && (
           <input
-            type="text"
+            type="email"
             name={infoKey}
             id=""
             className={isEditing ? '' : 'hidden'}
             ref={(ref) => (inputRefs.current[infoKey] = ref)}
             defaultValue={infoVal}
+            required
           />
         )}
+        {infoKey !== 'email' &&
+          infoKey !== 'address' &&
+          infoKey !== 'description' && (
+            <input
+              type="text"
+              name={infoKey}
+              id=""
+              className={isEditing ? '' : 'hidden'}
+              ref={(ref) => (inputRefs.current[infoKey] = ref)}
+              defaultValue={infoVal}
+              required
+            />
+          )}
         {/* <input
           type="text"
           name=""

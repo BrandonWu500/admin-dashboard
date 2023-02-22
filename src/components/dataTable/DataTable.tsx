@@ -38,22 +38,24 @@ type DataTableProps = {
 };
 
 const DataTable = ({ title }: DataTableProps) => {
+  const pluralTitle = title + 's';
   const [data, setData] = useState<User[]>([]);
   const [unsorted, setUnsorted] = useState<User[]>([]);
   const [headers, setHeaders] = useState<string[]>([]);
   const [sortDirections, setSortDirections] = useState<SortDirections>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [titleText, setTitleText] = useState(pluralTitle);
   useEffect(() => {
     // Single Fetch
     /* const fetchData = async () => {
       let list: any = [];
       try {
-        const querySnapshot = await getDocs(collection(db, 'users'));
+        const querySnapshot = await getDocs(collection(db, title));
         querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
           list.push({ id: doc.id, ...doc.data() });
         });
-        setUsers(list);
+        setData(list);
         setUnsorted(list);
       } catch (error) {
         console.log(error);
@@ -62,7 +64,7 @@ const DataTable = ({ title }: DataTableProps) => {
     fetchData(); */
 
     // Listen (Realtime Updates)
-    const unsub = onSnapshot(collection(db, 'users'), (snapshot) => {
+    const unsub = onSnapshot(collection(db, pluralTitle), (snapshot) => {
       try {
         const list: any = [];
         snapshot.docs.forEach((doc) => {
@@ -77,35 +79,39 @@ const DataTable = ({ title }: DataTableProps) => {
     return () => {
       unsub();
     };
-  }, []);
+  }, [pluralTitle]);
 
   useEffect(() => {
     if (unsorted.length === 0) {
+      setIsLoading(false);
+      setTitleText(`No ${pluralTitle} found`);
+      setHeaders([]);
       return;
     }
+    setTitleText(pluralTitle);
     const { name, img, password, timestamp, ...rest } = unsorted[0];
     let newHeaders: string[] = [
       ...Object.keys(rest).slice(0, 1),
-      'user',
+      title,
       ...Object.keys(rest).slice(1),
     ];
 
     const obj: SortDirections = {};
     newHeaders.forEach((header: string) => {
-      const filteredHeader = header === 'name' ? 'user' : header;
+      const filteredHeader = header === 'name' ? title : header;
       obj[filteredHeader] = 'UNSORTED';
     });
     setHeaders(newHeaders);
     setSortDirections(obj);
     setIsLoading(false);
-  }, [unsorted]);
+  }, [unsorted, title]);
 
   const handleSort = (header: string) => {
     let newData = [...data];
     if (sortDirections[header] === SortingDirection.UNSORTED) {
       sortDirections[header] = SortingDirection.ASCENDING;
       newData.sort((a: User, b: User) => {
-        const filteredHeader = header === 'user' ? 'name' : header;
+        const filteredHeader = header === title ? 'name' : header;
         const valA: string = a[filteredHeader].toLowerCase();
         const valB: string = b[filteredHeader].toLowerCase();
 
@@ -116,7 +122,7 @@ const DataTable = ({ title }: DataTableProps) => {
     } else if (sortDirections[header] === SortingDirection.ASCENDING) {
       sortDirections[header] = SortingDirection.DESCENDING;
       newData.sort((a: User, b: User) => {
-        const filteredHeader = header === 'user' ? 'name' : header;
+        const filteredHeader = header === title ? 'name' : header;
         const valA: string = a[filteredHeader].toLowerCase();
         const valB: string = b[filteredHeader].toLowerCase();
 
@@ -133,7 +139,7 @@ const DataTable = ({ title }: DataTableProps) => {
 
   const handleDelete = async (id: string) => {
     try {
-      await deleteDoc(doc(db, title, id));
+      await deleteDoc(doc(db, pluralTitle, id));
       const newData = data.filter((val) => val.id !== id);
       setData(newData);
     } catch (error) {
@@ -147,9 +153,9 @@ const DataTable = ({ title }: DataTableProps) => {
       ) : (
         <>
           <header className="top">
-            <h1>{title}</h1>
-            <Link to={`/${title}/new`}>
-              <button className="positive">Add {title.slice(0, -1)}</button>
+            <h1>{titleText}</h1>
+            <Link to={`/${pluralTitle}/new`}>
+              <button className="positive">Add {title}</button>
             </Link>
           </header>
           <table>
@@ -171,64 +177,66 @@ const DataTable = ({ title }: DataTableProps) => {
                     </button>
                   </th>
                 ))}
-                <th className="unsortable">Action</th>
+                {unsorted.length > 0 && <th className="unsortable">Action</th>}
               </tr>
             </thead>
             <tbody>
-              {data?.map((user: any) => (
-                <tr key={user.id}>
+              {data?.map((item: any) => (
+                <tr key={item.id}>
                   {headers?.map((header: string, headerIdx) => {
-                    if (header === 'user') {
+                    if (header === title) {
                       return (
-                        <td key={headerIdx} className="flex flex-left">
-                          <img
-                            src={
-                              user.img ? user.img : '/images/people/blank.png'
-                            }
-                            alt=""
-                            className="profile"
-                          />
-                          <span>{user.name}</span>
+                        <td key={headerIdx}>
+                          <div className="name-img">
+                            {item.img && (
+                              <img src={item.img} alt="" className="profile" />
+                            )}
+                            <span>{item.name}</span>
+                          </div>
                         </td>
                       );
                     } else if (header === 'status') {
-                      if (user[header] === 'active') {
+                      if (item[header] === 'active') {
                         return (
                           <td key={headerIdx}>
                             <div className="positive wrapper">
-                              {user[header]}
+                              {item[header]}
                             </div>
                           </td>
                         );
-                      } else if (user[header] === 'passive') {
+                      } else if (item[header] === 'passive') {
                         return (
                           <td key={headerIdx}>
                             <div className="negative wrapper">
-                              {user[header]}
+                              {item[header]}
                             </div>
                           </td>
                         );
-                      } else if (user[header] === 'pending') {
+                      } else if (item[header] === 'pending') {
                         return (
                           <td key={headerIdx}>
                             <div className="neutral wrapper">
-                              {user[header]}
+                              {item[header]}
                             </div>
                           </td>
                         );
                       }
                     }
 
-                    return <td key={headerIdx}>{user[header]}</td>;
+                    return (
+                      <td key={headerIdx}>
+                        <div className="td-wrapper">{item[header]}</div>
+                      </td>
+                    );
                   })}
                   <td>
-                    <div className="flex action">
-                      <Link to={`/users/${user.id}`}>
+                    <div className="flex flex-left action">
+                      <Link to={`/${pluralTitle}/${item.id}`}>
                         <button className="text-accent">View</button>
                       </Link>
                       <button
                         className="text-negative"
-                        onClick={() => handleDelete(user.id)}
+                        onClick={() => handleDelete(item.id)}
                       >
                         Delete
                       </button>

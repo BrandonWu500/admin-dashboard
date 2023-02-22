@@ -15,7 +15,7 @@ const List = () => {
       <div className="right">
         <Topbar />
         <div className="container shadow">
-          <DataTable title={title} />
+          <DataTable title={title.slice(0, -1)} />
         </div>
       </div>
     </div>

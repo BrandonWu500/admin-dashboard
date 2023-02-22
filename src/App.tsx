@@ -63,7 +63,7 @@ function App() {
                 path=":userId"
                 element={
                   <RequireAuth>
-                    <Single />
+                    <Single title="user" />
                   </RequireAuth>
                 }
               />
@@ -71,7 +71,7 @@ function App() {
                 path="new"
                 element={
                   <RequireAuth>
-                    <New inputs={userInputs} title="Add New User" />
+                    <New inputs={userInputs} title="users" />
                   </RequireAuth>
                 }
               />
@@ -89,7 +89,7 @@ function App() {
                 path=":productId"
                 element={
                   <RequireAuth>
-                    <Single />
+                    <Single title="product" />
                   </RequireAuth>
                 }
               />
@@ -97,7 +97,7 @@ function App() {
                 path="new"
                 element={
                   <RequireAuth>
-                    <New inputs={productInputs} title="Add New Product" />
+                    <New inputs={productInputs} title="products" />
                   </RequireAuth>
                 }
               />

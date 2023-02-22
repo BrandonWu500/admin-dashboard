@@ -15,9 +15,10 @@ interface User {
 
 type BasicTableProps = {
   user?: string;
+  product?: string;
 };
 
-const BasicTable = ({ user = 'all' }: BasicTableProps) => {
+const BasicTable = ({ user = 'all', product = 'all' }: BasicTableProps) => {
   const [users, setUsers] = useState<User[]>([]);
   useEffect(() => {
     if (user === 'all') {
@@ -27,6 +28,14 @@ const BasicTable = ({ user = 'all' }: BasicTableProps) => {
       setUsers(userOrders);
     }
   }, [user]);
+  useEffect(() => {
+    if (product === 'all') {
+      setUsers(orders);
+    } else {
+      const userOrders = orders.filter((order) => order.product === product);
+      setUsers(userOrders);
+    }
+  }, [product]);
   return (
     <table className="basicTable">
       <thead>

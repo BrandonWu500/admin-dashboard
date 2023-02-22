@@ -20,6 +20,10 @@ import ImagePreview from '../../components/imagePreview/ImagePreview';
 import ImageUpload from '../../components/imageUpload/ImageUpload';
 import { uploadFile } from '../../helperFunctions/helperFunctions';
 
+interface FormData {
+  [key: string]: string;
+}
+
 export interface FormInput {
   id: number;
   label: string;
@@ -34,7 +38,7 @@ type NewProps = {
 
 const New = ({ inputs, title }: NewProps) => {
   const [file, setFile] = useState<any>('');
-  const [data, setData] = useState({ email: '', password: '' });
+  const [data, setData] = useState<FormData>({ email: '', password: '' });
   const { email, password } = data;
   const [rdyToSave, setRdyToSave] = useState(true);
   const navigate = useNavigate();
@@ -45,15 +49,34 @@ const New = ({ inputs, title }: NewProps) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      await setDoc(doc(db, 'users', res.user.uid), {
-        ...data,
-        timestamp: serverTimestamp(),
-      });
-      navigate(-1);
-    } catch (error) {
-      console.log(error);
+    if (title === 'users') {
+      const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (!email.match(emailRegex)) {
+        toast.error('Invalid email');
+        throw new Error();
+      }
+      try {
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+        let obj = { ...data };
+        if (!('img' in data)) {
+          obj = { ...obj, img: '/images/people/blank.png' };
+        }
+        await setDoc(doc(db, 'users', res.user.uid), {
+          ...obj,
+          timestamp: serverTimestamp(),
+        });
+        navigate(-1);
+      } catch (error) {
+        console.log(error);
+      }
+    } else if (title === 'products') {
+      try {
+        const { email, password, ...rest } = data;
+        const docRef = await addDoc(collection(db, title), rest);
+        navigate(-1);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +95,7 @@ const New = ({ inputs, title }: NewProps) => {
         <Topbar />
         <div className="container">
           <header className="shadow">
-            <h1>{title}</h1>
+            <h1>{'Add New ' + title.slice(0, -1)}</h1>
           </header>
           <section className="content shadow">
             <div className="content-left">
@@ -91,6 +114,7 @@ const New = ({ inputs, title }: NewProps) => {
                       placeholder={input?.placeholder}
                       id={input.label.toLowerCase()}
                       onChange={handleInput}
+                      required
                     />
                   </div>
                 ))}
