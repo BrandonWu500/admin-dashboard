@@ -52,8 +52,10 @@ const Sidebar = () => {
               </Link>
             </li>
             <li>
-              <CreditCardIcon className="icon" />
-              <span>Orders</span>
+              <Link to="/orders">
+                <CreditCardIcon className="icon" />
+                <span>Orders</span>
+              </Link>
             </li>
             <h4>USEFUL</h4>
             <li>

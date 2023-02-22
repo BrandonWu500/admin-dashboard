@@ -1,16 +1,17 @@
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  query,
+  where,
+} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { orders } from '../../data/data';
+import { db } from '../../firebase';
 import './basicTable.scss';
 
-interface User {
-  id: number;
-  product: string;
-  img: string;
-  customer: string;
-  date: string;
-  amount: number;
-  method: string;
-  status: string;
+interface Item {
+  [key: string]: string;
 }
 
 type BasicTableProps = {
@@ -19,23 +20,46 @@ type BasicTableProps = {
 };
 
 const BasicTable = ({ user = 'all', product = 'all' }: BasicTableProps) => {
-  const [users, setUsers] = useState<User[]>([]);
+  const [data, setData] = useState<Item[]>([]);
   useEffect(() => {
+    // Listen (Realtime Updates)
+    const today = new Date();
+    const lastMonth = new Date(new Date().setMonth(today.getMonth() - 1));
+    const lastMonthQuery = query(
+      collection(db, 'orders'),
+      where('timestamp', '<=', today),
+      where('timestamp', '>', lastMonth)
+    );
+    const unsub = onSnapshot(lastMonthQuery, (snapshot) => {
+      try {
+        let list: any = [];
+        snapshot.docs.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        if (user !== 'all') {
+          list = list.filter((item: any) => item.customer === user);
+        }
+        if (product !== 'all') {
+          list = list.filter((item: any) => item.name === product);
+        }
+        setData(list);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+    return () => {
+      unsub();
+    };
+  }, []);
+  /* useEffect(() => {
     if (user === 'all') {
-      setUsers(orders);
+      setData(data);
     } else {
-      const userOrders = orders.filter((order) => order.customer === user);
-      setUsers(userOrders);
+      const userOrders = data.filter((item) => item.customer === user);
+      setData(userOrders);
     }
-  }, [user]);
-  useEffect(() => {
-    if (product === 'all') {
-      setUsers(orders);
-    } else {
-      const userOrders = orders.filter((order) => order.product === product);
-      setUsers(userOrders);
-    }
-  }, [product]);
+  }, [user]); */
+  useEffect(() => {}, [product]);
   return (
     <table className="basicTable">
       <thead>
@@ -50,25 +74,30 @@ const BasicTable = ({ user = 'all', product = 'all' }: BasicTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {users.map((order) => (
+        {data.map((order) => (
           <tr key={order.id}>
             <td>{order.id}</td>
             <td>
               <div className="flex">
-                <img src={order.img} alt="" />
-                <span>{order.product}</span>
+                {order.img && <img src={order.img} alt="" />}
+                <span>{order.name}</span>
               </div>
             </td>
             <td>{order.customer}</td>
-            <td>{order.date}</td>
+            <td>{new Date(order.date).toLocaleDateString()}</td>
             <td>{order.amount}</td>
-            <td>{order.method}</td>
-            {order.status === 'Approved' && (
+            <td>{order['payment method']}</td>
+            {order.status.toLowerCase() === 'approved' && (
               <td>
                 <div className="wrapper positive">{order.status}</div>
               </td>
             )}
-            {order.status === 'Pending' && (
+            {order.status.toLowerCase() === 'declined' && (
+              <td>
+                <div className="wrapper negative">{order.status}</div>
+              </td>
+            )}
+            {order.status.toLowerCase() === 'pending' && (
               <td>
                 <div className="wrapper neutral">{order.status}</div>
               </td>

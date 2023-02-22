@@ -8,7 +8,7 @@ import './globalStyles/style.scss';
 import './globalStyles/darkMode.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { productInputs, userInputs } from './data/formSource';
+import { orderInputs, productInputs, userInputs } from './data/formSource';
 import {
   DarkModeContext,
   DarkModeContextProvider,
@@ -71,7 +71,7 @@ function App() {
                 path="new"
                 element={
                   <RequireAuth>
-                    <New inputs={userInputs} title="users" />
+                    <New inputs={userInputs} title="user" />
                   </RequireAuth>
                 }
               />
@@ -97,7 +97,33 @@ function App() {
                 path="new"
                 element={
                   <RequireAuth>
-                    <New inputs={productInputs} title="products" />
+                    <New inputs={productInputs} title="product" />
+                  </RequireAuth>
+                }
+              />
+            </Route>
+            <Route path="orders">
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <List />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path=":orderId"
+                element={
+                  <RequireAuth>
+                    <Single title="order" />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="new"
+                element={
+                  <RequireAuth>
+                    <New inputs={orderInputs} title="order" />
                   </RequireAuth>
                 }
               />

@@ -64,16 +64,25 @@ const Single = ({ title }: SingleProps) => {
           <h1 className="text-center">Loading...</h1>
         ) : (
           <>
-            <div className="flex flex-left g-3">
-              <UserCard item={item} id={id} title={title} />
-              <section className="charts">
-                <Chart aspect={2 / 1} title={chartTitle} />
-              </section>
-            </div>
-            <section className="tables">
-              <h2>{tableTitle}</h2>
-              <BasicTable user={item.name} />
-            </section>
+            {title === 'order' ? (
+              <div className="flex flex-left g-3">
+                <UserCard item={item} id={id} title={title} />
+              </div>
+            ) : (
+              <>
+                <div className="flex flex-left g-3">
+                  <UserCard item={item} id={id} title={title} />
+                  <section className="charts">
+                    <Chart aspect={2 / 1} title={chartTitle} />
+                  </section>
+                </div>
+                <section className="tables">
+                  <h2>{tableTitle}</h2>
+                  {title === 'user' && <BasicTable user={item.name} />}
+                  {title === 'product' && <BasicTable product={item.name} />}
+                </section>
+              </>
+            )}
           </>
         )}
       </div>

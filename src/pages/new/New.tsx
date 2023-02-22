@@ -42,6 +42,7 @@ const New = ({ inputs, title }: NewProps) => {
   const { email, password } = data;
   const [rdyToSave, setRdyToSave] = useState(true);
   const navigate = useNavigate();
+  const pluralTitle = title + 's';
 
   useEffect(() => {
     file && uploadFile(file, setData, setRdyToSave);
@@ -49,7 +50,7 @@ const New = ({ inputs, title }: NewProps) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (title === 'users') {
+    if (pluralTitle === 'users') {
       const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if (!email.match(emailRegex)) {
         toast.error('Invalid email');
@@ -69,10 +70,24 @@ const New = ({ inputs, title }: NewProps) => {
       } catch (error) {
         console.log(error);
       }
-    } else if (title === 'products') {
+    } else if (pluralTitle === 'products') {
       try {
         const { email, password, ...rest } = data;
-        const docRef = await addDoc(collection(db, title), rest);
+        const docRef = await addDoc(collection(db, pluralTitle), {
+          ...rest,
+          timestamp: serverTimestamp(),
+        });
+        navigate(-1);
+      } catch (error) {
+        console.log(error);
+      }
+    } else if (pluralTitle === 'orders') {
+      try {
+        const { email, password, ...rest } = data;
+        const docRef = await addDoc(collection(db, pluralTitle), {
+          ...rest,
+          timestamp: serverTimestamp(),
+        });
         navigate(-1);
       } catch (error) {
         console.log(error);
@@ -95,7 +110,7 @@ const New = ({ inputs, title }: NewProps) => {
         <Topbar />
         <div className="container">
           <header className="shadow">
-            <h1>{'Add New ' + title.slice(0, -1)}</h1>
+            <h1>{'Add New ' + title}</h1>
           </header>
           <section className="content shadow">
             <div className="content-left">
@@ -112,7 +127,11 @@ const New = ({ inputs, title }: NewProps) => {
                     <input
                       type={input.type}
                       placeholder={input?.placeholder}
-                      id={input.label.toLowerCase()}
+                      id={
+                        input.label.toLowerCase() === 'product'
+                          ? 'name'
+                          : input.label.toLowerCase()
+                      }
                       onChange={handleInput}
                       required
                     />

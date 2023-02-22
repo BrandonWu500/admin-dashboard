@@ -13,13 +13,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../firebase';
 
-interface User {
-  /* id: string;
-  name: string;
-  img: string;
-  email: string;
-  age: number;
-  status: string; */
+interface ItemType {
   [header: string]: string;
 }
 
@@ -39,8 +33,8 @@ type DataTableProps = {
 
 const DataTable = ({ title }: DataTableProps) => {
   const pluralTitle = title + 's';
-  const [data, setData] = useState<User[]>([]);
-  const [unsorted, setUnsorted] = useState<User[]>([]);
+  const [data, setData] = useState<ItemType[]>([]);
+  const [unsorted, setUnsorted] = useState<ItemType[]>([]);
   const [headers, setHeaders] = useState<string[]>([]);
   const [sortDirections, setSortDirections] = useState<SortDirections>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -83,24 +77,38 @@ const DataTable = ({ title }: DataTableProps) => {
 
   useEffect(() => {
     if (unsorted.length === 0) {
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 6000);
       setTitleText(`No ${pluralTitle} found`);
       setHeaders([]);
       return;
     }
     setTitleText(pluralTitle);
-    const { name, img, password, timestamp, ...rest } = unsorted[0];
+
+    const { name, img, password, product, timestamp, ...rest } = unsorted[0];
+
+    let order: string[] = [];
+    if (title === 'user') {
+      order = ['id', 'username', 'email', 'phone', 'address', 'country'];
+    } else if (title === 'product') {
+      order = ['id', 'price', 'category', 'description', 'stock'];
+    } else if (title === 'order') {
+      order = ['id', 'customer', 'date', 'amount', 'payment method', 'status'];
+    }
+    const sortedHeaders = Object.keys(JSON.parse(JSON.stringify(rest, order)));
+
     let newHeaders: string[] = [
-      ...Object.keys(rest).slice(0, 1),
+      ...sortedHeaders.slice(0, 1),
       title,
-      ...Object.keys(rest).slice(1),
+      ...sortedHeaders.slice(1),
     ];
 
     const obj: SortDirections = {};
     newHeaders.forEach((header: string) => {
-      const filteredHeader = header === 'name' ? title : header;
-      obj[filteredHeader] = 'UNSORTED';
+      obj[header] = 'UNSORTED';
     });
+
     setHeaders(newHeaders);
     setSortDirections(obj);
     setIsLoading(false);
@@ -110,7 +118,7 @@ const DataTable = ({ title }: DataTableProps) => {
     let newData = [...data];
     if (sortDirections[header] === SortingDirection.UNSORTED) {
       sortDirections[header] = SortingDirection.ASCENDING;
-      newData.sort((a: User, b: User) => {
+      newData.sort((a: ItemType, b: ItemType) => {
         const filteredHeader = header === title ? 'name' : header;
         const valA: string = a[filteredHeader].toLowerCase();
         const valB: string = b[filteredHeader].toLowerCase();
@@ -121,7 +129,7 @@ const DataTable = ({ title }: DataTableProps) => {
       });
     } else if (sortDirections[header] === SortingDirection.ASCENDING) {
       sortDirections[header] = SortingDirection.DESCENDING;
-      newData.sort((a: User, b: User) => {
+      newData.sort((a: ItemType, b: ItemType) => {
         const filteredHeader = header === title ? 'name' : header;
         const valA: string = a[filteredHeader].toLowerCase();
         const valB: string = b[filteredHeader].toLowerCase();
@@ -196,7 +204,7 @@ const DataTable = ({ title }: DataTableProps) => {
                         </td>
                       );
                     } else if (header === 'status') {
-                      if (item[header] === 'active') {
+                      if (item[header]?.toLowerCase() === 'approved') {
                         return (
                           <td key={headerIdx}>
                             <div className="positive wrapper">
@@ -204,7 +212,7 @@ const DataTable = ({ title }: DataTableProps) => {
                             </div>
                           </td>
                         );
-                      } else if (item[header] === 'passive') {
+                      } else if (item[header]?.toLowerCase() === 'declined') {
                         return (
                           <td key={headerIdx}>
                             <div className="negative wrapper">
@@ -212,7 +220,7 @@ const DataTable = ({ title }: DataTableProps) => {
                             </div>
                           </td>
                         );
-                      } else if (item[header] === 'pending') {
+                      } else if (item[header]?.toLowerCase() === 'pending') {
                         return (
                           <td key={headerIdx}>
                             <div className="neutral wrapper">
@@ -221,6 +229,14 @@ const DataTable = ({ title }: DataTableProps) => {
                           </td>
                         );
                       }
+                    } else if (header === 'date') {
+                      return (
+                        <td key={headerIdx}>
+                          <div className="td-wrapper">
+                            {new Date(item[header]).toLocaleDateString()}
+                          </div>
+                        </td>
+                      );
                     }
 
                     return (

@@ -101,6 +101,8 @@ const UserCard = ({ item, id, title }: UserCardProps) => {
       order = ['username', 'email', 'phone', 'address', 'country'];
     } else if (title === 'product') {
       order = ['price', 'category', 'description', 'stock'];
+    } else if (title === 'order') {
+      order = ['customer', 'date', 'amount', 'payment method', 'status'];
     }
     const sortedHeaders = Object.keys(JSON.parse(JSON.stringify(rest, order)));
     setInfoInputHeaders(sortedHeaders);
@@ -134,9 +136,12 @@ const UserCard = ({ item, id, title }: UserCardProps) => {
       }
     });
     Object.entries(info).map(([key, val]) => {
-      if (!val) {
+      if (key !== 'img' && !val) {
         toast.error('You need to fill out all inputs before saving.');
         throw new Error();
+      }
+      if (key === 'img' && !val) {
+        obj['img'] = '';
       }
     });
     await setDoc(doc(db, title + 's', id), obj);

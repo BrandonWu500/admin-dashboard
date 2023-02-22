@@ -28,7 +28,7 @@ const UserCardRow = ({
             defaultValue={infoVal}
             required
           ></textarea>
-        )}{' '}
+        )}
         {infoKey === 'email' && (
           <input
             type="email"
@@ -40,7 +40,19 @@ const UserCardRow = ({
             required
           />
         )}
+        {infoKey === 'date' && (
+          <input
+            type="datetime-local"
+            name={infoKey}
+            id=""
+            className={isEditing ? '' : 'hidden'}
+            ref={(ref) => (inputRefs.current[infoKey] = ref)}
+            defaultValue={infoVal}
+            required
+          />
+        )}
         {infoKey !== 'email' &&
+          infoKey !== 'date' &&
           infoKey !== 'address' &&
           infoKey !== 'description' && (
             <input

@@ -75,3 +75,42 @@ export const productInputs = [
     placeholder: '50',
   },
 ];
+
+export const orderInputs = [
+  {
+    id: 1,
+    label: 'Product',
+    type: 'text',
+    placeholder: 'Apple Macbook Pro',
+  },
+  {
+    id: 2,
+    label: 'Customer',
+    type: 'text',
+    placeholder: 'John Doe',
+  },
+  {
+    id: 3,
+    label: 'Date',
+    type: 'datetime-local',
+    placeholder: '1/1/2023',
+  },
+  {
+    id: 4,
+    label: 'Amount',
+    type: 'text',
+    placeholder: '100',
+  },
+  {
+    id: 5,
+    label: 'Payment Method',
+    type: 'text',
+    placeholder: 'Online',
+  },
+  {
+    id: 6,
+    label: 'Status',
+    type: 'text',
+    placeholder: 'Approved',
+  },
+];
