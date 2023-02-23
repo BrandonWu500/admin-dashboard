@@ -1,8 +1,6 @@
 import './new.scss';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Topbar from '../../components/topbar/Topbar';
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import { ChangeEvent, useEffect, useState } from 'react';
 import {
   addDoc,
@@ -11,9 +9,8 @@ import {
   serverTimestamp,
   setDoc,
 } from 'firebase/firestore';
-import { storage, auth, db } from '../../firebase';
+import { auth, db } from '../../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ImagePreview from '../../components/imagePreview/ImagePreview';
@@ -51,6 +48,7 @@ const New = ({ inputs, title }: NewProps) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (pluralTitle === 'users') {
+      // eslint-disable-next-line
       const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if (!email.match(emailRegex)) {
         toast.error('Invalid email');
@@ -73,7 +71,7 @@ const New = ({ inputs, title }: NewProps) => {
     } else if (pluralTitle === 'products') {
       try {
         const { email, password, ...rest } = data;
-        const docRef = await addDoc(collection(db, pluralTitle), {
+        await addDoc(collection(db, pluralTitle), {
           ...rest,
           timestamp: serverTimestamp(),
         });
@@ -84,7 +82,7 @@ const New = ({ inputs, title }: NewProps) => {
     } else if (pluralTitle === 'orders') {
       try {
         const { email, password, ...rest } = data;
-        const docRef = await addDoc(collection(db, pluralTitle), {
+        await addDoc(collection(db, pluralTitle), {
           ...rest,
           timestamp: serverTimestamp(),
         });

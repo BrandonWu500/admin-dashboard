@@ -1,16 +1,9 @@
 import './dataTable.scss';
 import { useEffect, useState } from 'react';
-import { users as dummyData } from '../../data/data';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link } from 'react-router-dom';
-import {
-  collection,
-  getDocs,
-  doc,
-  deleteDoc,
-  onSnapshot,
-} from 'firebase/firestore';
+import { collection, doc, deleteDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 interface ItemType {
@@ -112,7 +105,7 @@ const DataTable = ({ title }: DataTableProps) => {
     setHeaders(newHeaders);
     setSortDirections(obj);
     setIsLoading(false);
-  }, [unsorted, title]);
+  }, [unsorted, title, pluralTitle]);
 
   const handleSort = (header: string) => {
     let newData = [...data];

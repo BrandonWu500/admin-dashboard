@@ -9,7 +9,7 @@ const ImagePreview = ({ file }: ImagePreviewProps) => {
   return (
     <div className="imagePreview profile-xl">
       {file ? (
-        <img src={URL.createObjectURL(file)} className="profile-xl" />
+        <img src={URL.createObjectURL(file)} className="profile-xl" alt="" />
       ) : (
         <div className="flex-col">
           <CameraAltIcon fontSize="large" />

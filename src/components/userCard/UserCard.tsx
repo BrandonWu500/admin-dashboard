@@ -1,18 +1,7 @@
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  serverTimestamp,
-  setDoc,
-  where,
-} from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { db, storage } from '../../firebase';
+import { db } from '../../firebase';
 import { uploadFile } from '../../helperFunctions/helperFunctions';
 import ImagePreview from '../imagePreview/ImagePreview';
 import ImageUpload from '../imageUpload/ImageUpload';
@@ -32,12 +21,12 @@ export interface DictRefs {
   [key: string]: HTMLInputElement | HTMLTextAreaElement;
 }
 
-const dummyUser: Info = {
+/* const dummyUser: Info = {
   email: 'janedoe@gmail.com',
   phone: '(+1)123-456-789',
   address: '123 Baker St, Boston, MA',
   country: 'United States',
-};
+}; */
 
 /* class InfoClass {
   email: string;
@@ -108,7 +97,7 @@ const UserCard = ({ item, id, title }: UserCardProps) => {
     const sortedHeaders = Object.keys(JSON.parse(JSON.stringify(rest, order)));
     setInfoInputHeaders(sortedHeaders);
     setInfoInputs(rest);
-  }, []);
+  }, [item, title]);
 
   useEffect(() => {
     file && uploadFile(file, setInfo, setRdyToSave);
@@ -121,7 +110,7 @@ const UserCard = ({ item, id, title }: UserCardProps) => {
     }
     const obj: Info = { ...info };
     // input validation
-    Object.entries(inputRefs?.current).map(([key, val]) => {
+    Object.entries(inputRefs?.current).forEach(([key, val]) => {
       if (val.value) {
         obj[key] = val.value;
       } else {
@@ -129,6 +118,7 @@ const UserCard = ({ item, id, title }: UserCardProps) => {
         throw new Error();
       }
       if (key === 'email') {
+        // eslint-disable-next-line
         const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (!val.value.match(emailRegex)) {
           toast.error('Invalid email');
@@ -136,7 +126,7 @@ const UserCard = ({ item, id, title }: UserCardProps) => {
         }
       }
     });
-    Object.entries(info).map(([key, val]) => {
+    Object.entries(info).forEach(([key, val]) => {
       if (key !== 'img' && !val) {
         toast.error('You need to fill out all inputs before saving.');
         throw new Error();
@@ -157,7 +147,7 @@ const UserCard = ({ item, id, title }: UserCardProps) => {
   };
 
   const resetInfo = () => {
-    Object.entries(infoInputs).map(([key, val]) => {
+    Object.entries(infoInputs).forEach(([key, val]) => {
       inputRefs.current[key].value = val;
     });
     setInfo(initInfo);

@@ -67,7 +67,7 @@ const Card = ({
       setNum(staticNum);
       setChangePercent(staticChangePercent);
     }
-  }, []);
+  }, [dynamic, queryTitle, staticChangePercent, staticNum]);
   return (
     <div className="card shadow">
       <div className="row">

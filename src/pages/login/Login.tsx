@@ -1,4 +1,3 @@
-import Sidebar from '../../components/sidebar/Sidebar';
 import './login.scss';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
@@ -37,8 +36,6 @@ const Login = () => {
         navigate('/');
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
         // ..
         setFormData({ ...formData, error: true });
       });

@@ -1,5 +1,4 @@
 import './userCardRow.scss';
-import { DictRefs, Info } from '../userCard/UserCard';
 
 type UserCardRowProps = {
   isEditing: boolean;

@@ -14,12 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { ThemeContext } from '../../context/theme/themeContext';
 
 const Sidebar = () => {
-  const {
-    state: { theme },
-    lightThemeOn,
-    darkThemeOn,
-    blueThemeOn,
-  } = useContext(ThemeContext);
+  const { lightThemeOn, darkThemeOn, blueThemeOn } = useContext(ThemeContext);
   const { logout } = useContext(AuthContext);
   const [navToggle, setNavToggle] = useState(false);
 

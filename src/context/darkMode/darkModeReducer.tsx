@@ -1,4 +1,4 @@
-import { INITIAL_STATE, StateType } from './darkModeContext';
+import { StateType } from './darkModeContext';
 
 export const enum REDUCER_ACTION_TYPE {
   LIGHT,

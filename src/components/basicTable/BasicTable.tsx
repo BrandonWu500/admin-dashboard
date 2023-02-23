@@ -1,12 +1,5 @@
-import {
-  collection,
-  getDocs,
-  onSnapshot,
-  query,
-  where,
-} from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { orders } from '../../data/data';
 import { db } from '../../firebase';
 import './basicTable.scss';
 
@@ -50,7 +43,7 @@ const BasicTable = ({ user = 'all', product = 'all' }: BasicTableProps) => {
     return () => {
       unsub();
     };
-  }, []);
+  }, [product, user]);
   /* useEffect(() => {
     if (user === 'all') {
       setData(data);
