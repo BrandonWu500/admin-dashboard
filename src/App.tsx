@@ -6,24 +6,24 @@ import Single from './pages/single/Single';
 import New from './pages/new/New';
 import './globalStyles/style.scss';
 import './globalStyles/darkMode.scss';
+import './globalStyles/blueTheme.scss';
+import './globalStyles/lightTheme.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { orderInputs, productInputs, userInputs } from './data/formSource';
-import {
-  DarkModeContext,
-  DarkModeContextProvider,
-  INITIAL_STATE,
-  useDarkMode,
-} from './context/darkMode/darkModeContext';
-import { ReactElement, useContext, useEffect } from 'react';
+
+import { ReactElement, useContext } from 'react';
 import { AuthContext } from './context/auth/authContext';
+import { ThemeContext } from './context/theme/themeContext';
 
 type ChildrenType = {
   children: ReactElement;
 };
 
 function App() {
-  const { darkMode } = useDarkMode();
+  const {
+    state: { theme },
+  } = useContext(ThemeContext);
 
   const {
     state: { curUser },
@@ -34,7 +34,7 @@ function App() {
   };
 
   return (
-    <div className={darkMode ? 'app dark' : 'app'}>
+    <div className={'app ' + theme}>
       <BrowserRouter>
         <Routes>
           <Route path="/">

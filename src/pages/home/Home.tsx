@@ -24,7 +24,7 @@ const Home = () => {
           <Featured />
           <Chart aspect={2 / 1} title="Last 6 Months (Revenue in $)" />
         </section>
-        <section className="tables">
+        <section className="tables shadow">
           <h2>Latest Orders</h2>
           <BasicTable />
         </section>

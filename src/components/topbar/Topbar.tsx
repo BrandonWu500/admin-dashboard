@@ -6,10 +6,15 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import ChatIcon from '@mui/icons-material/Chat';
 import SettingsIcon from '@mui/icons-material/Settings';
 import './topbar.scss';
-import { useDarkMode } from '../../context/darkMode/darkModeContext';
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/theme/themeContext';
 
 const Topbar = () => {
-  const { darkMode, toggleModes } = useDarkMode();
+  const {
+    state: { theme },
+    lightThemeOn,
+    darkThemeOn,
+  } = useContext(ThemeContext);
   return (
     <div className="topbar">
       <div className="left ">
@@ -27,13 +32,14 @@ const Topbar = () => {
             <span>English</span>
           </li>
           <li>
-            {darkMode ? (
-              <button onClick={toggleModes} className="btn-dispatch">
+            {theme === 'dark' && (
+              <button onClick={lightThemeOn} className="btn-dispatch">
                 <LightModeIcon />
                 <span>Light Mode</span>
               </button>
-            ) : (
-              <button onClick={toggleModes} className="btn-dispatch">
+            )}{' '}
+            {theme !== 'dark' && (
+              <button onClick={darkThemeOn} className="btn-dispatch">
                 <DarkModeIcon />
                 <span>Dark Mode</span>
               </button>

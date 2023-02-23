@@ -133,7 +133,6 @@ input {
 
 .shadow {
   border-radius: 10px;
-  box-shadow: $box-shadow;
 }
 
 .hidden {
@@ -160,7 +159,6 @@ input {
 
 .tables {
   padding: 2em;
-  box-shadow: $box-shadow;
   border-radius: 10px;
   width: 100%;
   max-width: 1500px;
@@ -186,6 +184,9 @@ input {
 }
 .accent {
   @include set-color($accent-color);
+}
+.accent-secondary {
+  @include set-color($accent-secondary);
 }
 
 /* text classes */

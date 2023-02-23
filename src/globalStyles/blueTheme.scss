@@ -1,0 +1,160 @@
+@import 'config';
+
+// set background color and text color
+@mixin set-color($color) {
+  background-color: rgba($color, 0.35);
+  color: lighten($color, 10%);
+}
+
+.app.blue {
+  background-color: $bg-blue-theme;
+  color: $text-blue-theme;
+  input {
+    background-color: transparent;
+
+    &::placeholder {
+      color: $text-primary-light;
+    }
+  }
+
+  h2,
+  h3 {
+    color: $text-blue-theme;
+  }
+
+  .shadow {
+    box-shadow: $box-shadow-blue-theme;
+  }
+
+  .text-accent {
+    color: $text-accent-light;
+  }
+  .image-proc-text {
+    color: $text-primary-light;
+  }
+
+  .positive {
+    @include set-color($positive-light);
+  }
+  .negative {
+    @include set-color($negative-light);
+  }
+  .accent {
+    @include set-color($accent-blue-theme);
+  }
+  .accent-secondary {
+    @include set-color($accent-light);
+  }
+  .text-positive {
+    color: lighten($positive-light, 10%);
+  }
+  .text-negative {
+    color: lighten($negative-light, 10%);
+  }
+  .text-accent {
+    color: ($accent-blue-theme);
+  }
+
+  .sidebar {
+    .menu-toggle {
+      background-color: $bg-blue-theme;
+      color: $text-blue-theme;
+    }
+    nav {
+      background-color: $bg-blue-theme;
+      color: $text-blue-theme;
+      h2,
+      .icon {
+        color: $accent-blue-theme;
+      }
+    }
+
+    .theme-square {
+      border-color: $accent-blue-theme;
+    }
+  }
+
+  .search {
+    border-color: $text-primary-light;
+    input,
+    button {
+      color: $text-primary-light;
+    }
+  }
+
+  .chart {
+    .chartGrid {
+      stroke: $text-blue-theme;
+      stop-color: $text-blue-theme;
+      color: $text-blue-theme;
+    }
+  }
+
+  .dataTable {
+    th {
+      button {
+        color: $text-primary-light;
+      }
+
+      &:hover {
+        background-color: $bg-darker;
+      }
+    }
+  }
+
+  .userCard {
+    h1 {
+      color: $text-blue-theme;
+    }
+
+    .input-title {
+      color: $text-blue-theme;
+    }
+
+    input {
+      border-bottom: 2px solid $text-blue-theme;
+    }
+  }
+
+  .userCardRow {
+    input,
+    textarea,
+    span {
+      background-color: $bg-blue-theme;
+      border: 0;
+      color: $text-blue-theme;
+    }
+    textarea {
+      border: 2px solid $text-blue-theme;
+      padding-left: 5px;
+    }
+    input {
+      border-bottom: 2px solid $text-blue-theme;
+    }
+  }
+
+  .imagePreview {
+    color: $text-blue-theme;
+  }
+
+  .imageUpload {
+    label {
+      color: $text-blue-theme;
+    }
+  }
+
+  // react-circular-progressbar
+
+  .CircularProgressbar-path {
+    stroke: $text-blue-theme;
+  }
+  .CircularProgressbar-trail {
+    stroke: gray;
+  }
+  .CircularProgressbar-text {
+    fill: $text-blue-theme;
+  }
+  .CircularProgressbar-background {
+    fill: green;
+  }
+}

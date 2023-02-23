@@ -9,17 +9,20 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import './sidebar.scss';
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
-import {
-  DarkModeContext,
-  useDarkMode,
-} from '../../context/darkMode/darkModeContext';
 import { AuthContext } from '../../context/auth/authContext';
 import MenuIcon from '@mui/icons-material/Menu';
+import { ThemeContext } from '../../context/theme/themeContext';
 
 const Sidebar = () => {
-  const { lightModeOn, darkModeOn } = useDarkMode();
+  const {
+    state: { theme },
+    lightThemeOn,
+    darkThemeOn,
+    blueThemeOn,
+  } = useContext(ThemeContext);
   const { logout } = useContext(AuthContext);
   const [navToggle, setNavToggle] = useState(false);
+
   return (
     <div className="sidebar">
       <button className="menu-toggle" onClick={() => setNavToggle(!navToggle)}>
@@ -92,8 +95,9 @@ const Sidebar = () => {
             </li>
             <h4>THEME</h4>
             <li>
-              <button className="theme-square" onClick={lightModeOn}></button>
-              <button className="theme-square" onClick={darkModeOn}></button>
+              <button className="theme-square" onClick={lightThemeOn}></button>
+              <button className="theme-square" onClick={darkThemeOn}></button>
+              <button className="theme-square" onClick={blueThemeOn}></button>
             </li>
           </ul>
         </div>

@@ -65,7 +65,7 @@ const Single = ({ title }: SingleProps) => {
         ) : (
           <>
             {title === 'order' ? (
-              <div className="flex flex-left g-3">
+              <div className="flex">
                 <UserCard item={item} id={id} title={title} />
               </div>
             ) : (

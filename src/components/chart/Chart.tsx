@@ -8,6 +8,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/theme/themeContext';
 
 const data = [
   { name: 'January', Total: 1200 },
@@ -24,8 +26,11 @@ type ChartProps = {
 };
 
 const Chart = ({ aspect, title }: ChartProps) => {
+  const {
+    state: { theme },
+  } = useContext(ThemeContext);
   return (
-    <div className="chart">
+    <div className="chart shadow">
       <h2>{title}</h2>
       <ResponsiveContainer width="100%" aspect={aspect}>
         <AreaChart
@@ -34,12 +39,30 @@ const Chart = ({ aspect, title }: ChartProps) => {
         >
           <defs>
             <linearGradient id="total" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              <stop
+                offset="5%"
+                stopColor="#8884d8"
+                stopOpacity={0.8}
+                className="chartGrid"
+              />
+              <stop
+                offset="95%"
+                stopColor="#8884d8"
+                stopOpacity={0}
+                className="chartGrid"
+              />
             </linearGradient>
           </defs>
-          <XAxis dataKey="name" stroke="gray" />
-          <YAxis dataKey="Total" stroke="gray" />
+          <XAxis
+            dataKey="name"
+            stroke={theme === 'blue' ? 'white' : 'gray'}
+            className="chartGrid"
+          />
+          <YAxis
+            dataKey="Total"
+            stroke={theme === 'blue' ? 'white' : 'gray'}
+            className="chartGrid"
+          />
           <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
           <Tooltip />
           <Area
@@ -48,6 +71,7 @@ const Chart = ({ aspect, title }: ChartProps) => {
             stroke="#8884d8"
             fillOpacity={1}
             fill="url(#total)"
+            className="chartGrid"
           />
         </AreaChart>
       </ResponsiveContainer>

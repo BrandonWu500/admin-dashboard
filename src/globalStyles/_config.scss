@@ -4,9 +4,12 @@ $negative-color: crimson;
 $negative-light: red;
 $neutral-color: goldenrod;
 $accent-color: purple;
+$accent-secondary: royalblue;
+$accent-secondary-light: skyblue;
 $accent-light: rgb(218, 45, 218);
 $text-dark: black;
 $text-primary-color: gray;
+$text-primary-dark: #555;
 $text-primary-light: lightgray;
 $text-accent-color: rebeccapurple;
 $text-accent-light: rgb(154, 85, 222);
@@ -14,10 +17,12 @@ $bg-light: whitesmoke;
 $bg-dark-200: #555;
 $bg-dark: #333;
 $bg-darker: #222;
-$bg-theme-3: royalblue;
-$text-theme-3: whitesmoke;
+$bg-blue-theme: rgb(65, 121, 225);
+$text-blue-theme: white;
+$accent-blue-theme: lightgray;
 $box-shadow: 2px 4px 10px 1px rgba(gray, 0.2);
 $box-shadow-light: 2px 4px 10px 1px rgba(lightgray, 0.3);
+$box-shadow-blue-theme: 2px 4px 10px 1px rgba(white, 0.3);
 $sidebar-width: 200px;
 
 // set background color and text color
@@ -35,9 +40,18 @@ $gapamounts: (1, 2, 3, 4, 5);
   }
 }
 
+// pad classes
+$paddingamounts: (1, 2, 3, 4, 5);
+
+@each $padding in $paddingamounts {
+  .p-#{$padding} {
+    padding: #{$padding}em !important;
+  }
+}
+
 // laptop responsive
 @mixin laptop {
-  @media (max-width: 1400px) {
+  @media (max-width: 1500px) {
     @content;
   }
 }

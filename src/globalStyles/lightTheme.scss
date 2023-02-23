@@ -1,18 +1,23 @@
 @import 'config';
 
-.app.dark {
-  background-color: $bg-dark;
-  color: $text-primary-light;
+.app.light {
+  background-color: $bg-light;
+  color: $text-dark;
   input {
     background-color: transparent;
 
     &::placeholder {
-      color: $text-primary-light;
+      color: $text-primary-color;
     }
   }
 
+  h2,
+  h3 {
+    color: $text-primary-color;
+  }
+
   .shadow {
-    box-shadow: $box-shadow-light;
+    box-shadow: $box-shadow;
   }
 
   .text-accent {
@@ -23,30 +28,31 @@
   }
 
   .positive {
-    @include set-color($positive-light);
+    @include set-color($positive-color);
   }
   .negative {
-    @include set-color($negative-light);
+    @include set-color($negative-color);
   }
   .accent {
-    @include set-color($accent-light);
-  }
-  .accent-secondary {
-    @include set-color($accent-secondary-light);
+    @include set-color($accent-color);
   }
 
   .sidebar {
     .menu-toggle {
-      background-color: $bg-dark;
-      color: $text-primary-light;
+      background-color: inherit;
+      color: inherit;
     }
     nav {
-      background-color: $bg-dark;
-      color: $text-primary-light;
+      background-color: inherit;
+      color: $text-primary-color;
       h2,
       .icon {
-        color: $text-accent-light;
+        color: $text-accent-color;
       }
+    }
+
+    .theme-square {
+      border-color: $text-accent-color;
     }
   }
 
@@ -54,29 +60,30 @@
     border-color: $text-primary-light;
     input,
     button {
-      color: $text-primary-light;
+      color: $text-primary-color;
     }
   }
 
   .dataTable {
     th {
+      color: $text-primary-color;
       button {
-        color: $text-primary-light;
+        color: inherit;
       }
 
       &:hover {
-        background-color: $bg-darker;
+        background-color: $text-primary-light;
       }
     }
   }
 
   .userCard {
     h1 {
-      color: $text-primary-light;
+      color: $text-primary-dark;
     }
 
     .input-title {
-      color: $text-primary-light;
+      color: $text-primary-dark;
     }
 
     input {
@@ -88,26 +95,28 @@
     input,
     textarea,
     span {
-      background-color: $bg-dark;
+      background-color: $bg-light;
       border: 0;
-      color: $text-primary-light;
+      color: $text-primary-color;
     }
+
     textarea {
       border: 2px solid $text-primary-light;
       padding-left: 5px;
     }
+
     input {
       border-bottom: 2px solid $text-primary-light;
     }
   }
 
   .imagePreview {
-    color: $text-primary-light;
+    color: $text-primary-color;
   }
 
   .imageUpload {
     label {
-      color: $text-primary-light;
+      color: $text-primary-color;
     }
   }
 }

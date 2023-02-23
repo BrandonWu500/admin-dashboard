@@ -5,20 +5,17 @@ import {
   AuthContextProvider,
   AUTH_INIT_STATE,
 } from './context/auth/authContext';
-import {
-  DarkModeContextProvider,
-  INITIAL_STATE,
-} from './context/darkMode/darkModeContext';
+import { INIT_STATE, ThemeContextProvider } from './context/theme/themeContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <DarkModeContextProvider {...INITIAL_STATE}>
+    <ThemeContextProvider {...INIT_STATE}>
       <AuthContextProvider {...AUTH_INIT_STATE}>
         <App />
       </AuthContextProvider>
-    </DarkModeContextProvider>
+    </ThemeContextProvider>
   </React.StrictMode>
 );
