@@ -12,11 +12,20 @@ import { Link } from 'react-router-dom';
 
 type CardProps = {
   title: string;
+  dynamic: boolean;
+  num: number;
+  changePercent: number;
 };
 
-const Card = ({ title }: CardProps) => {
+const Card = ({
+  title,
+  dynamic,
+  num: staticNum,
+  changePercent: staticChangePercent,
+}: CardProps) => {
   const [num, setNum] = useState(0);
   const [changePercent, setChangePercent] = useState(0);
+  const queryTitle = title.toLowerCase();
   useEffect(() => {
     const fetchData = async () => {
       const today = new Date();
@@ -24,12 +33,12 @@ const Card = ({ title }: CardProps) => {
       const prevMonth = new Date(new Date().setMonth(today.getMonth() - 2));
 
       const lastMonthQuery = query(
-        collection(db, 'users'),
+        collection(db, queryTitle),
         where('timestamp', '<=', today),
         where('timestamp', '>', lastMonth)
       );
       const prevMonthQuery = query(
-        collection(db, 'users'),
+        collection(db, queryTitle),
         where('timestamp', '<=', lastMonth),
         where('timestamp', '>', prevMonth)
       );
@@ -38,15 +47,22 @@ const Card = ({ title }: CardProps) => {
       const prevMonthData = await getDocs(prevMonthQuery);
 
       setNum(lastMonthData.docs.length);
-      setChangePercent(
-        ((lastMonthData.docs.length - prevMonthData.docs.length) /
-          prevMonthData.docs.length >
-        0
-          ? prevMonthData.docs.length
-          : 1) * 100
-      );
+
+      // to prevent infinity
+      const prevLength =
+        prevMonthData.docs.length === 0 ? 1 : prevMonthData.docs.length;
+      const changeNum =
+        ((lastMonthData.docs.length - prevMonthData.docs.length) / prevLength) *
+        100;
+      const changeString = changeNum.toFixed(0);
+      setChangePercent(Number(changeString));
     };
-    fetchData();
+    if (dynamic) {
+      dynamic && fetchData();
+    } else {
+      setNum(staticNum);
+      setChangePercent(staticChangePercent);
+    }
   }, []);
   return (
     <div className="card">
@@ -77,9 +93,14 @@ const Card = ({ title }: CardProps) => {
         </p>
       </div>
       <div className="row">
-        <Link to={`/${title.toLowerCase()}`}>
+        {dynamic ? (
+          <Link to={`/${title.toLowerCase()}`}>
+            <span className="link">View</span>
+          </Link>
+        ) : (
           <span className="link">View</span>
-        </Link>
+        )}
+
         {title === 'USERS' && <PersonIcon className="icon negative" />}
         {title === 'ORDERS' && <ShoppingCartIcon className="icon neutral" />}
         {title === 'EARNINGS' && <PaidIcon className="icon positive" />}

@@ -4,6 +4,7 @@ import {
   getDoc,
   getDocs,
   query,
+  serverTimestamp,
   setDoc,
   where,
 } from 'firebase/firestore';
@@ -144,7 +145,10 @@ const UserCard = ({ item, id, title }: UserCardProps) => {
         obj['img'] = '';
       }
     });
-    await setDoc(doc(db, title + 's', id), obj);
+    await setDoc(doc(db, title + 's', id), {
+      ...obj,
+      timestamp: serverTimestamp(),
+    });
     const { name, img, ...rest } = obj;
     setInfoInputs(rest);
     setInfo({ name, img });

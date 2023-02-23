@@ -1,23 +1,33 @@
 export const homeCards = [
   {
     title: 'USERS',
+    dynamic: true,
     num: 260,
     changePercent: 5,
   },
   {
+    title: 'PRODUCTS',
+    dynamic: true,
+    num: 720,
+    changePercent: -2,
+  },
+  {
     title: 'ORDERS',
+    dynamic: true,
     num: 720,
     changePercent: -2,
   },
   {
     title: 'EARNINGS',
+    dynamic: false,
     num: 4600,
     changePercent: 12,
   },
   {
     title: 'MY BALANCE',
+    dynamic: false,
     num: 7800,
-    changePercent: 0,
+    changePercent: -2,
   },
 ];
 

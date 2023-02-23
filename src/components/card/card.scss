@@ -22,6 +22,7 @@
 
     .link {
       border-bottom: 1px solid $text-primary-color;
+      cursor: pointer;
 
       &:hover {
         transform: scale(0.98);
