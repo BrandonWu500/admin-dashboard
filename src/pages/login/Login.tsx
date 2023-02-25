@@ -5,7 +5,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth/authContext';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { useDarkMode } from '../../context/darkMode/darkModeContext';
+import { ThemeContext } from '../../context/theme/themeContext';
 
 type FormDataType = {
   email: string;
@@ -21,7 +21,11 @@ const Login = () => {
   });
   const { email, password, error } = formData;
   const navigate = useNavigate();
-  const { toggleModes } = useDarkMode();
+  const {
+    state: { theme },
+    lightThemeOn,
+    darkThemeOn,
+  } = useContext(ThemeContext);
 
   const { login } = useContext(AuthContext);
 
@@ -47,7 +51,7 @@ const Login = () => {
           <div className="flex flex-col">
             <button
               type="button"
-              onClick={toggleModes}
+              onClick={theme === 'dark' ? lightThemeOn : darkThemeOn}
               className="btn-dispatch"
             >
               <DarkModeIcon />

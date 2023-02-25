@@ -1,4 +1,10 @@
-import { createContext, useCallback, useReducer, ReactElement } from 'react';
+import {
+  createContext,
+  useCallback,
+  useReducer,
+  ReactElement,
+  useEffect,
+} from 'react';
 import ThemeReducer, { REDUCER_ACTION_TYPE } from './themeReducer';
 
 export type ThemeStateType = {
@@ -6,11 +12,16 @@ export type ThemeStateType = {
 };
 
 export const INIT_STATE: ThemeStateType = {
-  theme: 'light',
+  // @ts-ignore
+  theme: JSON.parse(localStorage.getItem('themeColor')) ?? 'light',
 };
 
 const useThemeContext = (initState: ThemeStateType) => {
   const [state, dispatch] = useReducer(ThemeReducer, INIT_STATE);
+
+  useEffect(() => {
+    localStorage.setItem('themeColor', JSON.stringify(state.theme));
+  }, [state.theme]);
 
   /* useCallback memoizes functions so they are not re-created
   and cause component to re-render */
